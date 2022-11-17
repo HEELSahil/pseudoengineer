@@ -36,7 +36,7 @@ export default function Footer() {
                 <div>{` • `}</div>
                 <div>{`© ${new Date().getFullYear()}`}</div>
                 <div>{` • `}</div>
-                <p>Site under development</p>
+                <p>Site Under Development</p>
             </div>
         </div>
     </footer>
