@@ -1,9 +1,10 @@
 'use client';
 
 import { ThemeProvider } from 'next-themes';
-import '../styles/globals.css'
-import LayoutWrapper from './layoutwrapper';
-import siteMetadata from '../data/siteMetadata'
+
+import "@styles/globals.css"
+import LayoutWrapper from '@components/LayoutWrapper';
+import siteMetadata from '@data/siteMetadata';
 
 export default function RootLayout({ children }) {
   return (

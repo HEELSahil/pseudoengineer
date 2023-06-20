@@ -1,10 +1,10 @@
-import siteMetadata from '../data/siteMetadata'
-import headerNavLinks from '../data/headerNavLinks'
+import siteMetadata from '@data/siteMetadata';
+import headerNavLinks from '@data/headerNavLinks';
 import Link from 'next/link'
-import SectionContainer from './sectioncontainer'
-import Footer from './footer'
-import ThemeSwitch from './themeswitch'
-import MobileNav from './mobilenav'
+import SectionContainer from './SectionContainer';
+import Footer from './Footer'
+import ThemeSwitch from './ThemeSwitch'
+import MobileNav from './MobileNav'
 
 
 const LayoutWrapper = ({ children }) => {
@@ -18,13 +18,6 @@ const LayoutWrapper = ({ children }) => {
                 <div className="mr-3 bg-image-one dark:bg-image-two h-16 w-64 bg-cover">
                   {/* <img className='h-20 w-80 logo-switch' src="https://heelsahil.com/logo-w.png" width='50' height='100' alt=''></img> */}
                 </div>
-                {/* {typeof siteMetadata.initial === 'string' ? (
-                  <div className="hidden h-6 text-2xl font-semibold sm:block">
-                    {siteMetadata.initial}
-                  </div>
-                ) : (
-                  siteMetadata.initial
-                )} */}
               </div>
             </Link>
           </div>
