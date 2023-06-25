@@ -1,10 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CoursesCard = ({ id, title, description, imgSrc }) => (
+const CoursesCard = ({ id, title, slug, description, imgSrc }) => (
     <div className="md p-4 md:w-1/2 lg:w-1/3" style={{ maxWidth: '544px' }}>
         <div className={`${ imgSrc && 'h-full'} overflow-hidden rounded-lg border-2 border-gray-200 border-opacity-60 dark:border-gray-700`}>
-        <Link href={`/courses/${id}`} className="" key={id}>
+        <Link href={`/courses/${slug}`} className="" key={id}>
             <Image
                 alt={title}
                 src={imgSrc}
