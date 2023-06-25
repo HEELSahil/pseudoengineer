@@ -1,9 +1,13 @@
 import React from 'react'
 
-const Course = () => {
+const CourseList = ({params}) => {
+    console.log(params)
+    const id = params.id
   return (
-    <div>Course</div>
+    <div>Course {id}
+    
+    </div>
   )
 }
 
-export default Course
+export default CourseList
