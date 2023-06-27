@@ -5,6 +5,7 @@ export const coursesList = [
         slug: 'mern-stack',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/mern.png',
+        tags: [ 'REACT', 'NODE', 'MONGODB']
     },
     {
         id: 2,
@@ -12,6 +13,7 @@ export const coursesList = [
         slug: 'flutter',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/flutter.png',
+        tags: [ 'FLUTTER', 'DART']
     },
     {
         id: 3,
@@ -19,6 +21,7 @@ export const coursesList = [
         slug: 'tailwindcss',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        tags: [ 'TAILWINDCSS']
     },
     {
         id: 4,
@@ -26,6 +29,7 @@ export const coursesList = [
         slug: 'swift-programming',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        tags: [ 'SWIFT']
     },
     {
         id: 5,
@@ -33,6 +37,7 @@ export const coursesList = [
         slug: 'react-native',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        tags: [ 'REACT NATIVE']
     },
     {
         id: 6,
@@ -40,5 +45,6 @@ export const coursesList = [
         slug: 'typescript',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        tags: [ 'TYPESCRIPT', 'VITE']
     },
   ]
