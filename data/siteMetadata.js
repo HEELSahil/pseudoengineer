@@ -14,6 +14,7 @@ const siteMetadata = {
     email: 'address@yoursite.com',
     github: 'https://github.com',
     twitter: 'https://twitter.com/Twitter',
+    instagram: 'https://instagram.com',
     facebook: 'https://facebook.com',
     youtube: 'https://youtube.com',
     linkedin: 'https://www.linkedin.com',
