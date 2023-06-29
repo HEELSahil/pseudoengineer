@@ -9,12 +9,12 @@ export default function Page(){
                     Get In Touch
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400 text-lg">
-                    I'm always open to chat, connect with new people and explore new opportunities. Feel free to get in touch and let's have a discussion about how we can work together.
+                    I&apos;m always open to chat, connect with new people and explore new opportunities. Feel free to get in touch and let&apos;s have a discussion about how we can work together.
                 </p>
             </div>
             <div className="container pt-8">
                 <p className="text-gray-500 dark:text-gray-400 text-lg">
-                    If you have a project or idea in mind where I can contribute, don't hesitate contacting me. You can reach out to me directly by sending an email or connecting on social media. Also, feel free to mail me about any relevant job opportunities.
+                    If you have a project or idea in mind where I can contribute, don&apos;t hesitate contacting me. You can reach out to me directly by sending an email or connecting on social media. Also, feel free to mail me about any relevant job opportunities.
                 </p>
 
                 <div className="-m-4 flex flex-wrap py-8 xl:pr-5">
