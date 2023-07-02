@@ -6,7 +6,7 @@ Welcome to the repository for the pseudoEngineer website! This website serves as
 
 
 ## Development Status
-This website is currently in the development phase. It is being built using [mention the technology or framework you're using]. Feel free to contribute, suggest improvements, or report any issues you come across.
+This website is currently in the development phase. It is being built using Next.js and Tailwind CSS. Feel free to contribute, suggest improvements, or report any issues you come across.
 
 <img width="1470" alt="image" src="https://github.com/HEELSahil/pseudoengineer/assets/54645878/21afed66-bb42-4f89-8b2c-b1237089a9a1">
 
