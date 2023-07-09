@@ -16,7 +16,6 @@ This website is currently in the development phase. It is being built using Next
 - Tutorials: Find a wide range of programming and coding tutorials covering various topics and technologies.
 - Portfolio: Explore my projects and achievements in the field of programming.
 - Video Showcase: Watch and access all the videos uploaded on my YouTube channel.
-- Code Samples: Find code samples and snippets used in the tutorials and projects.
 - Resources: Discover additional resources, references, and recommended tools.
 
 
