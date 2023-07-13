@@ -5,6 +5,8 @@ export const coursesList = [
         slug: 'mern-stack',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/mern.png',
+        courseHeading: 'Build a Full Stack MERN App in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'REACT', 'NODE', 'MONGODB']
     },
     {
@@ -13,6 +15,8 @@ export const coursesList = [
         slug: 'flutter',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/flutter.png',
+        courseHeading: 'Build a Flutter App in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'FLUTTER', 'DART']
     },
     {
@@ -21,6 +25,8 @@ export const coursesList = [
         slug: 'tailwindcss',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        courseHeading: 'Learn Tailwind CSS in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'TAILWINDCSS']
     },
     {
@@ -29,6 +35,8 @@ export const coursesList = [
         slug: 'swift-programming',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        courseHeading: 'Learn Swift Programming in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'SWIFT']
     },
     {
@@ -37,6 +45,8 @@ export const coursesList = [
         slug: 'react-native',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        courseHeading: 'Build a React Native in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'REACT NATIVE']
     },
     {
@@ -45,6 +55,8 @@ export const coursesList = [
         slug: 'typescript',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
         imgSrc: '/static/images/tailwind.jpg',
+        courseHeading: 'Learn TypeScript in an 8-Hour Hands-On Course',
+        src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
         tags: [ 'TYPESCRIPT', 'VITE']
     },
   ]
