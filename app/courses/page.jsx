@@ -1,30 +1,11 @@
-"use client"
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { coursesList } from '@data/coursesList';
-import CoursesCard from '@components/CoursesCard';
 import siteMetadata from "@data/siteMetadata";
+import FeaturedCourses from "@components/FeaturedCourses";
+import RecentCourses from "@components/RecentCourses";
 
 
 export default function Page(){
-    const [data, setData] = useState([]);
-    const [featuredData, setFeaturedData] = useState([]);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            setData(coursesList);
-        };
-        fetchData();
-
-        const fetchFeaturedData = async () => {
-            const filteredData = coursesList.filter(course => course.id === 1 || course.id === 2 || course.id === 4);
-            setFeaturedData(filteredData);
-        };
-        fetchFeaturedData()
-    }, []);
-
     return(
         <section className="divide-y divide-gray-200 dark:divide-gray-700">
             <div className="space-y-2 pt-6 pb-8 md:space-y-5">
@@ -32,21 +13,8 @@ export default function Page(){
                     Featured Courses 
                 </h1>
             </div>
-            <div className="container py-12">
-                <div className="-m-4 flex flex-wrap">
-                    {featuredData.map((d) => (
-                        <CoursesCard
-                            key={d.title}
-                            id={d.id}
-                            title={d.title}
-                            slug={d.slug}
-                            description={d.description}
-                            imgSrc={d.imgSrc}
-                            tags={d.tags}
-                        />
-                    ))}
-                </div>
-            </div>
+
+            <FeaturedCourses />
 
             <div className="space-y-2 py-8 md:space-y-5">
                 <div className="flex flex-col xl:flex-row justify-between text-center w-full p-6 border-2 border-gray-300 rounded-3xl">
@@ -80,21 +48,8 @@ export default function Page(){
                 </h1>
             </div>
 
-            <div className="container py-12">
-                <div className="-m-4 flex flex-wrap">
-                    {data.map((d) => (
-                        <CoursesCard
-                            key={d.title}
-                            id={d.id}
-                            title={d.title}
-                            slug={d.slug}
-                            description={d.description}
-                            imgSrc={d.imgSrc}
-                            tags={d.tags}
-                        />
-                    ))}
-                </div>
-            </div>
+            <RecentCourses />
+            
         </section>
     )
 }
