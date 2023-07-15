@@ -13,10 +13,10 @@ This website is currently in the development phase. It is being built using Next
 
 ## Upcoming Features
 
-- Tutorials: Find a wide range of programming and coding tutorials covering various topics and technologies.
+- Tutorials: Find a wide range of programming and coding tutorials covering various programming topics and technologies.
 - Portfolio: Explore my projects and achievements in the field of programming.
 - Video Showcase: Watch and access all the videos uploaded on my YouTube channel.
-- Resources: Discover additional resources, references, and recommended tools.
+- Resources: Discover additional resources and references.
 
 
 ## Getting Started
@@ -34,7 +34,7 @@ yarn dev
 
 3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.jsx`. The page auto-updates as you edit the file.
+You can start editing the page by modifying `app/layout.jsx`. The page auto-updates as you edit the file.
 
 
 ## Contributing
