@@ -20,8 +20,9 @@ export default function CourseList ({params}) {
         <p className='text-center pb-9 font-medium text-gray-500 dark:text-gray-400'>{course.description}</p>
         <div className="flex justify-center pb-9 py-2 xl:py-4 mx-2 xl:mx-12">
           <Link href={siteMetadata.youtube}>
-            <button className="items-center text-xl border-2 border-gray-300 px-7 py-2 rounded-full hover:scale-110 bg-black dark:bg-white dark:text-black text-white transition-all duration-200">
-              <span className="pl-1 font-medium">Explore Playlist</span>
+            <button className="flex items-center text-xl border-2 border-gray-300 px-7 py-2 rounded-full hover:scale-110 bg-black dark:bg-white dark:text-black text-white transition-all duration-200">
+              <span className="pl-1 pr-1 font-medium">Explore Playlist</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4" d="M4 40.836c4.893-5.973 9.238-9.362 13.036-10.168c3.797-.805 7.412-.927 10.846-.365V41L44 23.545L27.882 7v10.167c-6.349.05-11.746 2.328-16.192 6.833C7.245 28.505 4.681 34.117 4 40.836Z" clipRule="evenodd"/></svg>
               </button>
           </Link>
         </div>
@@ -44,7 +45,7 @@ export default function CourseList ({params}) {
             </div>
           </div>
           <div className="inline-block p-[2px] rounded-b-xl rounded-r-xl font-medium bg-gradient-to-r from-indigo-400 via-purple-400 to-indigo-400">
-            <div className="w-full h-full rounded-b-xl rounded-r-xl bg-white dark:bg-zinc-900 px-10 py-10 space-y-3">
+            <div className="w-full h-full rounded-b-xl rounded-r-xl bg-white dark:bg-zinc-900 px-8 md:px-10 py-8 md:py-10 space-y-3">
               <p>{detailsPara1}</p>
               <p>{detailsPara2}</p>
               <p>Channel your inner stargazer and shoot a ⭐ towards the course&apos;s GitHub repository!</p>

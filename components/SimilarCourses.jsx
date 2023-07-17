@@ -31,7 +31,7 @@ const SimilarCourses = ({currentCourseSlug, tags}) => {
     <>
         <div className="flex flex-row justify-between">
             <div>
-                <h3 className="font-extrabold text-2xl tracking-wide">Similar courses like this one</h3>
+                <h3 className="font-bold md:font-extrabold text-[21px] md:text-2xl tracking-wide">Similar courses like this one</h3>
             </div>
             <div>
                 <button onClick={() => handleScroll(-416)}>
@@ -64,7 +64,7 @@ const SimilarCourses = ({currentCourseSlug, tags}) => {
                                         height={306}
                                     />
                                     <div className="px-1 pt-4 pb-3">
-                                        <h2 className="mb-3 text-xl font-bold">{s.courseHeading}</h2>
+                                        <h2 className="mb-3 text-[18px] font-bold">{s.courseHeading}</h2>
                                     </div>
                                 </div>
                                 </Link>
