@@ -2,11 +2,13 @@ import Link from "next/link";
 
 import { coursesList } from '@data/coursesList'
 import siteMetadata from "@data/siteMetadata"
+import SimilarCourses from "@components/SimilarCourses";
 
 export default function CourseList ({params}) {
 
   const slug = String(params.id)
   const course = coursesList.find((course) => course.slug === slug);
+  const courseTags = course.tags;
 
   return (
     <section>
@@ -30,7 +32,8 @@ export default function CourseList ({params}) {
                 allowFullScreen
             ></iframe>
         </div>
-        <div className='pt-12'></div>
+        <div className='pt-16'></div>
+      <SimilarCourses currentCourseSlug={slug} tags={courseTags} />
     </section>
   )
 }

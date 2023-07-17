@@ -41,13 +41,13 @@ export const coursesList = [
     },
     {
         id: 5,
-        title: 'React Native',
-        slug: 'react-native',
+        title: 'React JS',
+        slug: 'react-js',
         description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been...',
-        imgSrc: '/static/images/tailwind.jpg',
-        courseHeading: 'Build a React Native in an 8-Hour Hands-On Course',
+        imgSrc: '/static/images/mern.png',
+        courseHeading: 'Learn React JS in an 8-Hour Hands-On Course',
         src: 'https://www.youtube.com/embed/Wt9sF9cJnPc',
-        tags: [ 'REACT NATIVE']
+        tags: [ 'REACT', 'TAILWINDCSS']
     },
     {
         id: 6,
