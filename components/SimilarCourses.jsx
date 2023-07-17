@@ -51,19 +51,20 @@ const SimilarCourses = ({currentCourseSlug, tags}) => {
             }
         `}</style>
             <div className="overflow-x-scroll flex space-x-4" style={{ scrollSnapType: "x mandatory", scrollBehavior: "smooth" }} ref={sliderRef}>
-                {filteredCourses.map((item) => (
-                    <div className="px-2" style={{ maxWidth: '544px' }}>
+                {filteredCourses.map((s) => (
+                    <div className="px-2" style={{ maxWidth: '544px' }} key={s.id}>
                             <div className="flex h-full w-96 justify-center">
-                            <Link href={`/courses/${item.slug}`} className="" key={item.id}>
-                                <div className={`${ item.imgSrc && 'h-full'} overflow-hidden`}>
+                            <Link href={`/courses/${s.slug}`} className="" key={s.id}>
+                                <div className={`${ s.imgSrc && 'h-full'} overflow-hidden`}>
                                     <Image
-                                        src={item.imgSrc}
+                                        alt={s.title}
+                                        src={s.imgSrc}
                                         className="object-cover object-center rounded-xl"
                                         width={544}
                                         height={306}
                                     />
                                     <div className="px-1 pt-4 pb-3">
-                                        <h2 className="mb-3 text-xl font-bold">{item.courseHeading}</h2>
+                                        <h2 className="mb-3 text-xl font-bold">{s.courseHeading}</h2>
                                     </div>
                                 </div>
                                 </Link>
