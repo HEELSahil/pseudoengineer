@@ -54,7 +54,7 @@ const SimilarCourses = ({currentCourseSlug, tags}) => {
                 {filteredCourses.map((s) => (
                     <div className="px-2" style={{ maxWidth: '544px' }} key={s.id}>
                             <div className="flex h-full w-96 justify-center">
-                            <Link href={`/courses/${s.slug}`} className="" key={s.id}>
+                            <Link href={`/courses/${s.slug}`} target="_blank" className="" key={s.id}>
                                 <div className={`${ s.imgSrc && 'h-full'} overflow-hidden`}>
                                     <Image
                                         alt={s.title}
