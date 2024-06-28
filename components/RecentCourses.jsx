@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { coursesList } from '@data/coursesList';
-import CoursesCard from '@components/CoursesCard';
+import FolderCard from '@components/FolderCard';
 
 export default function RecentCourses() {
     const [data, setData] = useState([]);
@@ -20,7 +20,7 @@ export default function RecentCourses() {
             <div className="container py-12">
                 <div className="-m-4 flex flex-wrap">
                     {data.map((d) => (
-                        <CoursesCard
+                        <FolderCard
                             key={d.title}
                             id={d.id}
                             title={d.title}
