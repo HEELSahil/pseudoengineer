@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { coursesList } from '@data/coursesList';
 import FolderCard from '@components/FolderCard';
 
@@ -9,6 +9,8 @@ export default function HomePage() {
   const [selectedTag, setSelectedTag] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 3;
+
+  const coursesRef = useRef(null);
 
   // Count occurrences of each tag
   const tagCounts = coursesList.flatMap(course => course.tags)
@@ -35,23 +37,86 @@ export default function HomePage() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+//   const scrollToSection3 = () => {
+//     coursesRef.current.scrollIntoView({ behavior: 'smooth' });
+//   };
+
+  const smoothScrollToCourses = () => {
+    const targetPosition = coursesRef.current.getBoundingClientRect().top;
+    const startPosition = window.pageYOffset;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    const duration = 750; // Adjust the duration to control the speed
+
+    const animation = (currentTime) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = ease(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    const ease = (t, b, c, d) => {
+      t /= d / 2;
+      if (t < 1) return c / 2 * t * t + b;
+      t--;
+      return -c / 2 * (t * (t - 2) - 1) + b;
+    };
+
+    requestAnimationFrame(animation);
+  };
+
   return (<>
-    <section className="container mx-auto py-12">
+    <section>
+      <div className="flex justify-center md:pr-20 lg:pr-0 xl:pr-60 lg:pt-10 text-4xl md:text-6xl lg:text-7xl font-extrabold underline bg-gradient-to-r bg-clip-text text-transparent from-indigo-500 via-purple-500 to-indigo-500 animate-text">
+        From Pretend to Pro, 
+        Your Journey to Genuine Tech Mastery Starts Here
+      </div>
+      <p className="text-gray-500 dark:text-gray-400 text-lg pt-3 md:pb-6">
+        With easy-to-follow, practical courses that simplify complex technologies, pseudoEngineer will help you achieve genuine mastery and ensure your skills are job-ready.
+      </p>
+    </section>
+    
+    <section className="flex flex-col md:flex-row justify-between items-start md:space-x-8 py-6 md:py-6">
+      <div className="relative justify-start inline-block">
+        <button
+          onClick={smoothScrollToCourses}
+          className="relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 animate-text text-white text-md md:text-lg font-semibold rounded-md shadow-lg hover:shadow-xl transition-shadow duration-200 z-10"
+        >
+          <span>Explore The Learning Vault</span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            className="ml-2 w-5 h-5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+          </svg>
+        </button>
+        <div className="absolute inset-x-0 top-full mt-[-49px] mr-[-7px] mx-auto w-[292px] md:w-[315px] h-14 bg-gray-300 rounded-md shadow-lg"></div>
+      </div>
+      <div className="bg-homepage-black dark:bg-homepage-white w-80 bg-cover pb-72 mt-14 md:mt-[-60px] m-0 self-center"></div>
+    </section>
+   
+    <section ref={coursesRef} className="container mx-auto py-12">
       <div className="my-6">
         <div className="flex justify-between">
           <div className={`flex flex-wrap ${showAllTags ? '' : 'max-h-10 overflow-hidden'} transition-all duration-300`}>
             {sortedTags.map(({ tag, count }) => (
-                <button
-                    key={tag}
-                    onClick={() => {
-                        setSelectedTag(selectedTag === tag ? '' : tag);
-                        setCurrentPage(1); // Reset to page 1 when changing the filter
-                        }}
-                    className={`px-2 py-1 m-1 text-xs font-semibold rounded-full flex items-center space-x-1 ${selectedTag === tag ? 'bg-black dark:bg-white text-white dark:text-black' : 'hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black'}`}
-                >
-                    <span>{tag}</span>
-                    <span className="bg-gray-400 rounded-full px-2 text-xs">{count}</span>
-                </button>
+              <button
+                key={tag}
+                onClick={() => {
+                  setSelectedTag(selectedTag === tag ? '' : tag);
+                  setCurrentPage(1); // Reset to page 1 when changing the filter
+                }}
+                className={`px-2 py-1 m-1 text-xs font-semibold rounded-full flex items-center space-x-1 ${selectedTag === tag ? 'bg-black dark:bg-white text-white dark:text-black' : 'hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black'}`}
+              >
+                <span>{tag}</span>
+                <span className="bg-gray-400 rounded-full px-2 text-xs">{count}</span>
+              </button>
             ))}
           </div>
           <button
@@ -123,6 +188,5 @@ export default function HomePage() {
         </nav>
       </div>
     </section>
-  </>
-  );
+  </>);
 }

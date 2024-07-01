@@ -33,6 +33,10 @@ module.exports = {
           "url('https://heelsahil.com/logo-b.png')",
         'image-two':
           "url('https://heelsahil.com/logo-wh.png')",
+        'homepage-black':
+          "url('https://heelsahil.com/pseudoEngineer_homepage_black.png')",
+        'homepage-white':
+          "url('https://heelsahil.com/pseudoEngineer_homepage_white.png')",
       }),
       spacing: {
         '9/16': '56.25%',
