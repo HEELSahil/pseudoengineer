@@ -9,7 +9,7 @@ export default function Page(){
     return(
         <section className="divide-y divide-gray-200 dark:divide-gray-700">
             <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-                <h1 className="pb-2 text-4xl md:text-6xl sm:leading-10 md:leading-14 leading-9 tracking-tight font-extrabold md:font-bold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-indigo-400 via-violet-400 to-indigo-500 animate-text">
+                <h1 className="pb-2 text-4xl md:text-6xl sm:leading-10 md:leading-14 leading-9 tracking-tight font-extrabold md:font-bold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-cyan-400 via-violet-400 to-cyan-500 animate-text">
                     Featured Courses 
                 </h1>
             </div>
