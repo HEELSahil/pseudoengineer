@@ -8,7 +8,7 @@ datasource db {
 }
 
 model PageViews {
-    id        Int     @id @default(autoincrement())
-    pagePath  String  @unique
-    viewsCount Int    @default(0)
+  id         Int    @id @default(autoincrement())
+  pagePath   String @unique
+  viewsCount Int    @default(0)
 }
