@@ -3,8 +3,12 @@
 import { useState, useRef } from 'react';
 import { coursesList } from '@data/coursesList';
 import FolderCard from '@components/FolderCard';
+import usePageViewLogger from "@components/usePageViewLogger"
 
 export default function HomePage() {
+
+  usePageViewLogger('/');
+
   const [showAllTags, setShowAllTags] = useState(false);
   const [selectedTag, setSelectedTag] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
@@ -82,7 +86,7 @@ export default function HomePage() {
       <div className="relative justify-start inline-block">
         <button
           onClick={smoothScrollToCourses}
-          className="relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 animate-text text-white text-md md:text-lg font-semibold rounded-md shadow-lg hover:shadow-xl transition-shadow duration-200 z-10"
+          className="relative inline-flex items-center px-8 py-4 bg-gradient-to-r from-indigo-500 via-purple-500 to-indigo-500 animate-text text-white text-md md:text-lg font-semibold rounded-md shadow-lg hover:shadow-xl transition-shadow duration-200 z-2"
         >
           <span>Explore The Learning Vault</span>
           <svg
@@ -96,9 +100,14 @@ export default function HomePage() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </button>
-        <div className="absolute inset-x-0 top-full mt-[-49px] mr-[-7px] mx-auto w-[292px] md:w-[315px] h-14 bg-gray-300 rounded-md shadow-lg"></div>
+        <div className="absolute inset-x-0 top-full mt-[-49px] mr-[-7px] mx-auto w-[292px] md:w-[315px] h-14 bg-gray-300 rounded-md shadow-lg -z-50"></div>
       </div>
-      <div className="bg-homepage-black dark:bg-homepage-white w-80 bg-cover pb-72 mt-14 md:mt-[-60px] m-0 self-center"></div>
+      {/* <div className="bg-homepage-black dark:bg-homepage-white w-80 bg-cover pb-72 mt-14 md:mt-[-60px] m-0 self-center"></div> */}
+      <img
+  src="/static/images/pseudoEngineer_homepage_black.png" // Replace with the correct path to your image
+  alt="Background Image"
+  className="w-80 mt-14 md:mt-[-60px] m-0 self-center"
+/>
     </section>
    
     <section ref={coursesRef} className="container mx-auto py-12">

@@ -1,0 +1,14 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://neondb_owner:D5y3UwMhofuH@ep-lingering-art-a5zx1eyo.us-east-2.aws.neon.tech/neondb?sslmode=require"
+}
+
+model PageViews {
+    id        Int     @id @default(autoincrement())
+    pagePath  String  @unique
+    viewsCount Int    @default(0)
+}

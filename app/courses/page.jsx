@@ -1,11 +1,15 @@
+'use client';
+
 import Link from "next/link";
 
 import siteMetadata from "@data/siteMetadata";
 import FeaturedCourses from "@components/FeaturedCourses";
 import RecentCourses from "@components/RecentCourses";
+import usePageViewLogger from "@components/usePageViewLogger"
 
 
 export default function Page(){
+    usePageViewLogger('/courses');
     return(
         <section className="divide-y divide-gray-200 dark:divide-gray-700">
             <div className="space-y-2 pt-6 pb-8 md:space-y-5">

@@ -1,7 +1,13 @@
+"use client";
+
 import Link from "next/link"
 import siteMetadata from "@data/siteMetadata"
+import usePageViewLogger from "@components/usePageViewLogger"
 
 export default function Page(){
+    
+    usePageViewLogger('/contact');
+
     return(
         <section className="divide-y divide-gray-200 dark:divide-gray-700">
             <div className="space-y-2 pt-6 pb-8 md:space-y-5">
