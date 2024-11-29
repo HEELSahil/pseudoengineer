@@ -1,15 +1,14 @@
 generator client {
-  provider = "prisma-client-js"
-}
-
-datasource db {
-  provider = "postgresql"
-  url = env("DATABASE_URL")
-
-}
-
-model PageViews {
-  id         Int    @id @default(autoincrement())
-  pagePath   String @unique
-  viewsCount Int    @default(0)
-}
+    provider = "prisma-client-js"
+  }
+  
+  datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+  }
+  
+  model PageViews {
+      id        Int     @id @default(autoincrement())
+      pagePath  String  @unique
+      viewsCount Int    @default(0)
+  }
