@@ -1,4 +1,7 @@
 export const metadata = {
+    metadataBase: process.env.NODE_ENV === 'production'
+      ? new URL('https://www.pseudoengineer.dev')
+      : new URL('http://localhost:3000'),
     title: 'Programming Courses | pseudoEngineer',
     description: 'Explore our featured and recent programming courses. Learn coding, web development, and more with pseudoEngineer.',
     keywords: ['pseudoengineer', 'programming courses', 'coding tutorials', 'web development', 'software engineering'],

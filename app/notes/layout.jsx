@@ -1,4 +1,7 @@
 export const metadata = {
+  metadataBase: process.env.NODE_ENV === 'production'
+    ? new URL('https://www.pseudoengineer.dev')
+    : new URL('http://localhost:3000'),
   title: 'Download Course Notes | pseudoEngineer',
   description: 'Access and download free, high-quality course notes for programming and development topics. Perfect for students and engineers!',
   keywords: ['pseudoengineer', 'course notes', 'free notes', 'engineering notes', 'programming notes', 'programming cheatsheets', 'coding cheatsheets'],

@@ -1,4 +1,7 @@
 export const metadata = {
+    metadataBase: process.env.NODE_ENV === 'production'
+      ? new URL('https://www.pseudoengineer.dev')
+      : new URL('http://localhost:3000'),
     title: 'Contact | pseudoEngineer',
     description: 'Connect with pseudoEngineer for collaborations, inquiries, or opportunities.',
     openGraph: {
