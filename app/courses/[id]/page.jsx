@@ -3,11 +3,16 @@
 import { useState } from 'react';
 import { coursesList } from '@data/coursesList';
 import CoursesCard from '@components/CoursesCard';
+import usePageViewLogger from '@components/usePageViewLogger';
 
 export default function CourseList({ params }) {
   const [searchTerm, setSearchTerm] = useState('');
   const slug = String(params.id);
+  // const pathname = usePathname(); // Get the current path, e.g., "/courses/mern-stack" (i can use this method as well to get the slug instead of doing const slug = String(params.id);)
+  // const slug = pathname.split('/').pop(); // Extract the last part of the path as the slug
   const course = coursesList.find((course) => course.slug === slug);
+
+  usePageViewLogger(slug);
 
   const handleSearch = (e) => {
       setSearchTerm(e.target.value);

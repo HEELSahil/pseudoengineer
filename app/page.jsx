@@ -6,7 +6,6 @@ import FolderCard from '@components/FolderCard';
 import usePageViewLogger from "@components/usePageViewLogger"
 
 export default function HomePage() {
-
   usePageViewLogger('/');
 
   const [showAllTags, setShowAllTags] = useState(false);

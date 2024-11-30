@@ -1,12 +1,16 @@
+"use client"
+
 import Link from 'next/link';
 import { coursesList } from '@data/coursesList';
 import siteMetadata from '@data/siteMetadata';
 import SimilarCourses from '@components/SimilarCourses';
+import usePageViewLogger from '@components/usePageViewLogger';
 
 export default function Problem({ params }) {
     const { id: courseSlug, problemId: problemSlug } = params;
     const course = coursesList.find(course => course.slug === courseSlug);
     const problem = course?.folder ? Object.values(course.folder).find(p => p.cslug === problemSlug) : null;
+    usePageViewLogger(problemSlug);
 
     if (!course || !problem) {
         return <div>Problem not found</div>;
