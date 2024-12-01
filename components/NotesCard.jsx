@@ -17,7 +17,7 @@ const NotesCard = ({ title, imgSrc, href }) => (
                         <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">{title}</h2>
                         <p className="mb-3 max-w-none text-gray-500 dark:text-gray-400">Download Course Notes Here</p>
                         <Link href={href} className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                            <button type="button">Download &rarr;</button>
+                            Download &rarr;
                         </Link>
                     </div>
                 </div>

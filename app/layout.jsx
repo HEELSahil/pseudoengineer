@@ -4,9 +4,11 @@ export const metadata = {
   metadataBase: process.env.NODE_ENV === 'production'
     ? new URL('https://www.pseudoengineer.dev')
     : new URL('http://localhost:3000'),
+
   title: 'pseudoEngineer',
   description: 'Achieve genuine tech mastery with practical courses that simplify complex technologies. Your journey to becoming a job-ready engineer starts here.',
   keywords: ['pseudoengineer', 'programming courses', 'tech mastery', 'coding tutorials', 'software engineering', 'web development'],
+
   openGraph: {
     title: 'pseudoEngineer',
     description: 'Achieve genuine tech mastery with practical courses that simplify complex technologies. Your journey to becoming a job-ready engineer starts here.',
@@ -21,12 +23,13 @@ export const metadata = {
     ],
     type: 'website',
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'pseudoEngineer',
     description: 'Achieve genuine tech mastery with practical courses that simplify complex technologies. Your journey to becoming a job-ready engineer starts here.',
     images: ['https://www.pseudoengineer.dev/pseudoengineer.png'],
-  },
+  }
 };
 
 export default function RootLayout({ children }) {

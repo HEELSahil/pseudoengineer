@@ -2,9 +2,11 @@ export const metadata = {
   metadataBase: process.env.NODE_ENV === 'production'
     ? new URL('https://www.pseudoengineer.dev')
     : new URL('http://localhost:3000'),
+
   title: 'Download Course Notes | pseudoEngineer',
   description: 'Access and download free, high-quality course notes for programming and development topics. Perfect for students and engineers!',
   keywords: ['pseudoengineer', 'course notes', 'free notes', 'engineering notes', 'programming notes', 'programming cheatsheets', 'coding cheatsheets'],
+
   openGraph: {
     title: 'Download Course Notes | pseudoEngineer',
     description: 'Access and download free, high-quality course notes for programming and development topics. Perfect for students and engineers!',
@@ -19,12 +21,13 @@ export const metadata = {
     ],
     type: 'website',
   },
+
   twitter: {
     card: 'summary_large_image',
     title: 'Download Course Notes | pseudoEngineer',
     description: 'Access and download free, high-quality course notes for programming and development topics. Perfect for students and engineers!',
     images: ['https://www.pseudoengineer.dev/pseudoengineer.png'],
-  },
+  }
 };
 
 export default function Layout({ children }) {
