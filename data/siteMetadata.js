@@ -14,11 +14,12 @@ const siteMetadata = {
     email: 'address@yoursite.com',
     github: 'https://www.github.com/HEELSahil',
     twitter: 'https://www.twitter.com/pseudoengr',
-    instagram: 'https://www.instagram.com/pseudoengr',
+    instagram: 'https://www.instagram.com/pseudoengineerdev',
     facebook: 'https://www.facebook.com',
     youtube: 'https://www.youtube.com/@pseudoengineerdev',
     linkedin: 'https://www.linkedin.com/company/pseudoengineer',
     discord: 'https://www.discord.com',
+    pinterest: 'https://www.pinterest.com/pseudoengineerdev',
     locale: 'en-US',
     analytics: {
       // If you want to use an analytics provider you have to add it to the
