@@ -1,42 +1,40 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
-const colors = require('tailwindcss/colors')
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
 module.exports = {
   content: [
-    "./app/**/*.{js,ts,jsx,tsx}",
-    "./pages/**/*.{js,ts,jsx,tsx}",
-    "./components/**/*.{js,ts,jsx,tsx}",
-    "./layouts/**/*.{js,ts,jsx,tsx}",
-    "./data/**/*.{js,ts,jsx,tsx}",
+    './app/**/*.{js,ts,jsx,tsx}',
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+    './layouts/**/*.{js,ts,jsx,tsx}',
+    './data/**/*.{js,ts,jsx,tsx}',
   ],
   darkMode: 'media',
   darkMode: 'class',
   theme: {
     extend: {
-      'animation': {
-        'text':'text 4s ease infinite',
+      animation: {
+        text: 'text 4s ease infinite',
       },
-      'keyframes': {
-        'text': {
-            '0%, 100%': {
-               'background-size':'200% 200%',
-                'background-position': 'left center'
-            },
-            '50%': {
-               'background-size':'200% 200%',
-                'background-position': 'right center'
-            }
+      keyframes: {
+        text: {
+          '0%, 100%': {
+            'background-size': '200% 200%',
+            'background-position': 'left center',
+          },
+          '50%': {
+            'background-size': '200% 200%',
+            'background-position': 'right center',
+          },
         },
       },
       backgroundImage: (theme) => ({
-        'image-one':
-          "url('https://heelsahil.com/logo-b.png')",
-        'image-two':
-          "url('https://heelsahil.com/logo-wh.png')",
+        'image-one': "url('https://pseudoengineer.dev/logo-b.png')",
+        'image-two': "url('https://pseudoengineer.dev/logo-wh.png')",
         'homepage-black':
-          "url('https://heelsahil.com/pseudoEngineer_homepage_black.png')",
+          "url('https://pseudoengineer.dev/pseudoEngineer_homepage_black.png')",
         'homepage-white':
-          "url('https://heelsahil.com/pseudoEngineer_homepage_white.png')",
+          "url('https://pseudoengineer.dev/pseudoEngineer_homepage_white.png')",
       }),
       spacing: {
         '9/16': '56.25%',
@@ -188,4 +186,4 @@ module.exports = {
     },
   },
   plugins: [],
-}
+};
