@@ -32,9 +32,9 @@ module.exports = {
         'image-one': "url('https://pseudoengineer.dev/logo-b.png')",
         'image-two': "url('https://pseudoengineer.dev/logo-wh.png')",
         'homepage-black':
-          "url('https://pseudoengineer.dev/pseudoEngineer_homepage_black.png')",
+          "url('https://pseudoengineer.dev/pseudoengineer_home_b.png')",
         'homepage-white':
-          "url('https://pseudoengineer.dev/pseudoEngineer_homepage_white.png')",
+          "url('https://pseudoengineer.dev/pseudoengineer_home_w.png')",
       }),
       spacing: {
         '9/16': '56.25%',
