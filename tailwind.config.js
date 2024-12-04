@@ -29,12 +29,12 @@ module.exports = {
         },
       },
       backgroundImage: (theme) => ({
-        'image-one': "url('https://pseudoengineer.dev/logo-b.png')",
-        'image-two': "url('https://pseudoengineer.dev/logo-wh.png')",
+        'image-one': "url('https://assets.pseudoengineer.dev/logo-b.png')",
+        'image-two': "url('https://assets.pseudoengineer.dev/logo-wh.png')",
         'homepage-black':
-          "url('https://pseudoengineer.dev/pseudoengineer_home_b.png')",
+          "url('https://assets.pseudoengineer.dev/pseudoengineer_home_b.png')",
         'homepage-white':
-          "url('https://pseudoengineer.dev/pseudoengineer_home_w.png')",
+          "url('https://assets.pseudoengineer.dev/pseudoengineer_home_w.png')",
       }),
       spacing: {
         '9/16': '56.25%',
