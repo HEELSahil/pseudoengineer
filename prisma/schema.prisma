@@ -1,14 +1,70 @@
 generator client {
-    provider = "prisma-client-js"
-  }
-  
-  datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-  }
-  
-  model PageViews {
-      id        Int     @id @default(autoincrement())
-      pagePath  String  @unique
-      viewsCount Int    @default(0)
-  }
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model PageViews {
+  id         Int    @id @default(autoincrement())
+  pagePath   String @unique
+  viewsCount Int    @default(0)
+}
+
+// Tutorial Page
+model Tutorial {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  description String
+  sections    Section[]
+}
+
+// Outer Accordion
+model Section {
+  id         Int       @id @default(autoincrement())
+  tutorial   Tutorial  @relation(fields: [tutorialId], references: [id])
+  tutorialId Int
+  title      String
+  lectures   Lecture[]
+}
+
+// Inner Accordion
+model Lecture {
+  id         Int      @id @default(autoincrement())
+  title      String
+  slug       String?  @unique
+  sectionId  Int
+  section    Section  @relation(fields: [sectionId], references: [id])
+  articleUrl String?
+  youtubeUrl String?
+  tasks      Task[]
+}
+
+
+// Table Rows with Checkboxes
+model Task {
+  id          Int        @id @default(autoincrement())
+  slug        String     @unique  // Stable identifier
+  lecture     Lecture    @relation(fields: [lectureId], references: [id])
+  lectureId   Int
+  title       String
+  difficulty  String     @default("Easy")
+  articleUrl  String?
+  youtubeUrl  String?
+  practiceUrl String?
+  progress    Progress[] // One task can have progress for multiple users
+}
+
+// (Temporary) Local User Progress (to be replaced with actual auth later)
+model Progress {
+  id           Int     @id @default(autoincrement())
+  pseudoUserId String
+  task         Task    @relation(fields: [taskId], references: [id])
+  taskId       Int
+  completed    Boolean @default(false)
+
+  @@unique([pseudoUserId, taskId]) // Ensure one record per task per user
+}

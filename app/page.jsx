@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { coursesList } from '@data/coursesList';
-import FolderCard from '@components/FolderCard';
+import SeriesCard from '@components/SeriesCard';
 import usePageViewLogger from '@components/usePageViewLogger';
 
 export default function HomePage() {
@@ -188,7 +188,7 @@ export default function HomePage() {
         </div>
         <div className="flex flex-wrap -m-4">
           {currentCourses.map((course) => (
-            <FolderCard
+            <SeriesCard
               key={course.id}
               id={course.id}
               title={course.title}
