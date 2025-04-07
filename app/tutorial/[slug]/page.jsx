@@ -35,11 +35,16 @@ export default function TutorialPage({ params }) {
   if (loading) return <p>Loading...</p>;
   if (!tutorialData) return <p>Not found</p>;
 
-  // These should be outside map, just before return
-  const allLectures = Array.isArray(tutorialData.sections)
-    ? tutorialData.sections.flatMap((section) => section.lectures || [])
+  // Count all tasks: either from lectures or directly from section
+  const allTasks = Array.isArray(tutorialData.sections)
+    ? tutorialData.sections.flatMap((section) => {
+        if (Array.isArray(section.lectures) && section.lectures.length > 0) {
+          return section.lectures.flatMap((lec) => lec.tasks || []);
+        }
+        return section.tasks || [];
+      })
     : [];
-  const allTasks = allLectures.flatMap((lecture) => lecture.tasks || []);
+
   const completedTasks = allTasks.filter(
     (task) => task.progress?.[0]?.completed
   ).length;
@@ -60,37 +65,48 @@ export default function TutorialPage({ params }) {
 
       {Array.isArray(tutorialData.sections) &&
         tutorialData.sections.map((section) => {
-          const totalLectures = section.lectures.length;
+          const isLectureBased = section.lectures?.length > 0;
 
-          const completedLectures = section.lectures.filter((lecture) =>
-            lecture.tasks.every((task) => task.progress?.[0]?.completed)
+          const sectionTasks = isLectureBased
+            ? section.lectures.flatMap((lec) => lec.tasks || [])
+            : section.tasks || [];
+
+          const completed = sectionTasks.filter(
+            (t) => t.progress?.[0]?.completed
           ).length;
 
           return (
             <AccordionSection
               key={section.id}
               title={section.title}
-              totalCount={`${completedLectures}/${totalLectures}`}
+              totalCount={`${completed}/${sectionTasks.length}`}
             >
-              {section.lectures.map((lecture) => {
-                const totalTasks = lecture.tasks.length;
-                const completedTasks = lecture.tasks.filter(
-                  (task) => task.progress?.[0]?.completed
-                ).length;
+              {isLectureBased ? (
+                section.lectures.map((lecture) => {
+                  const totalTasks = lecture.tasks.length;
+                  const completedTasks = lecture.tasks.filter(
+                    (task) => task.progress?.[0]?.completed
+                  ).length;
 
-                return (
-                  <AccordionSection
-                    key={lecture.id}
-                    title={lecture.title}
-                    totalCount={`${completedTasks}/${totalTasks}`}
-                  >
-                    <ContentTable
-                      tasks={lecture.tasks}
-                      onTaskToggle={() => fetchData(pseudoUserId)}
-                    />
-                  </AccordionSection>
-                );
-              })}
+                  return (
+                    <AccordionSection
+                      key={lecture.id}
+                      title={lecture.title}
+                      totalCount={`${completedTasks}/${totalTasks}`}
+                    >
+                      <ContentTable
+                        tasks={lecture.tasks}
+                        onTaskToggle={() => fetchData(pseudoUserId)}
+                      />
+                    </AccordionSection>
+                  );
+                })
+              ) : (
+                <ContentTable
+                  tasks={section.tasks}
+                  onTaskToggle={() => fetchData(pseudoUserId)}
+                />
+              )}
             </AccordionSection>
           );
         })}

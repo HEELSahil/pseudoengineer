@@ -13,6 +13,7 @@ CREATE TABLE "Section" (
     "id" SERIAL NOT NULL,
     "tutorialId" INTEGER NOT NULL,
     "title" TEXT NOT NULL,
+    "slug" TEXT,
 
     CONSTRAINT "Section_pkey" PRIMARY KEY ("id")
 );
@@ -55,6 +56,9 @@ CREATE TABLE "Progress" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Tutorial_slug_key" ON "Tutorial"("slug");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Section_slug_key" ON "Section"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Lecture_slug_key" ON "Lecture"("slug");

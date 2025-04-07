@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request, { params }) {
   const { slug } = params;
-  const pseudoUserId = request.headers.get('x-user-id'); // We’ll pass this from frontend using fetch headers
+  const pseudoUserId = request.headers.get('x-user-id') || '';
 
   try {
     const tutorial = await prisma.tutorial.findUnique({
@@ -18,9 +18,19 @@ export async function GET(request, { params }) {
                   include: {
                     progress: {
                       where: {
-                        pseudoUserId: pseudoUserId || '', // fallback if not sent
+                        pseudoUserId,
                       },
                     },
+                  },
+                },
+              },
+            },
+            // 👇 include tasks directly under section (if any)
+            tasks: {
+              include: {
+                progress: {
+                  where: {
+                    pseudoUserId,
                   },
                 },
               },
