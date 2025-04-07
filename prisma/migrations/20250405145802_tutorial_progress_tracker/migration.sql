@@ -33,7 +33,8 @@ CREATE TABLE "Lecture" (
 -- CreateTable
 CREATE TABLE "Task" (
     "id" SERIAL NOT NULL,
-    "lectureId" INTEGER NOT NULL,
+    "lectureId" INTEGER,
+    "sectionId" INTEGER,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "difficulty" TEXT NOT NULL DEFAULT 'Easy',
@@ -54,30 +55,20 @@ CREATE TABLE "Progress" (
     CONSTRAINT "Progress_pkey" PRIMARY KEY ("id")
 );
 
--- CreateIndex
+-- Unique Indexes
 CREATE UNIQUE INDEX "Tutorial_slug_key" ON "Tutorial"("slug");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Section_slug_key" ON "Section"("slug");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Lecture_slug_key" ON "Lecture"("slug");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Task_slug_key" ON "Task"("slug");
-
--- CreateIndex
 CREATE UNIQUE INDEX "Progress_pseudoUserId_taskId_key" ON "Progress"("pseudoUserId", "taskId");
 
--- AddForeignKey
+-- Foreign Keys
 ALTER TABLE "Section" ADD CONSTRAINT "Section_tutorialId_fkey" FOREIGN KEY ("tutorialId") REFERENCES "Tutorial"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
--- AddForeignKey
 ALTER TABLE "Lecture" ADD CONSTRAINT "Lecture_sectionId_fkey" FOREIGN KEY ("sectionId") REFERENCES "Section"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
--- AddForeignKey
-ALTER TABLE "Task" ADD CONSTRAINT "Task_lectureId_fkey" FOREIGN KEY ("lectureId") REFERENCES "Lecture"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Task" ADD CONSTRAINT "Task_lectureId_fkey" FOREIGN KEY ("lectureId") REFERENCES "Lecture"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
--- AddForeignKey
+ALTER TABLE "Task" ADD CONSTRAINT "Task_sectionId_fkey" FOREIGN KEY ("sectionId") REFERENCES "Section"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
 ALTER TABLE "Progress" ADD CONSTRAINT "Progress_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "Task"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
