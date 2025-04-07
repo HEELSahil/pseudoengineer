@@ -32,7 +32,26 @@ export default function TutorialPage({ params }) {
     fetchData(id);
   }, [params.slug]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="w-full px-4 py-6 space-y-6 animate-pulse">
+        <div className="h-10 rounded-lg w-3/4 bg-gray-200 dark:bg-zinc-800" />
+        <div className="h-5 rounded-lg w-full bg-gray-200 dark:bg-zinc-800" />
+        <div className="h-5 rounded-lg w-2/3 bg-gray-200 dark:bg-zinc-800" />
+
+        {[1, 2, 3].map((i) => (
+          <div
+            key={i}
+            className="border border-gray-200 dark:border-zinc-700 rounded-xl p-4 space-y-3 bg-white dark:bg-zinc-900"
+          >
+            <div className="h-4 rounded-lg w-1/2 bg-gray-200 dark:bg-zinc-800" />
+            <div className="h-4 rounded-lg w-full bg-gray-200 dark:bg-zinc-800" />
+            <div className="h-4 rounded-lg w-3/4 bg-gray-200 dark:bg-zinc-800" />
+          </div>
+        ))}
+      </div>
+    );
+
   if (!tutorialData) return <p>Not found</p>;
 
   // Count all tasks: either from lectures or directly from section
