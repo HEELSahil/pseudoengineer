@@ -9,7 +9,6 @@ module.exports = {
     './layouts/**/*.{js,ts,jsx,tsx}',
     './data/**/*.{js,ts,jsx,tsx}',
   ],
-  darkMode: 'media',
   darkMode: 'class',
   theme: {
     extend: {

@@ -1,4 +1,6 @@
-import ClientLayout from './ClientLayout';
+import { ThemeProvider } from '@/components/ThemeProvider';
+import LayoutWrapper from '@/components/LayoutWrapper';
+import '@/styles/globals.css';
 
 export const metadata = {
   metadataBase:
@@ -49,9 +51,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <ClientLayout>{children}</ClientLayout>
+        <ThemeProvider>
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </ThemeProvider>
       </body>
     </html>
   );
