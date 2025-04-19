@@ -44,7 +44,7 @@ export default function CourseList({ params }) {
             className="w-full px-4 py-2 border-[2.5px] border-gray-400 rounded-full shadow-md focus:outline-none focus:ring-[2.5px] focus:ring-violet-500 focus:border-transparent"
           />
         </div>
-        <div className="-m-4 flex flex-wrap">
+        <div className="-mt-2 flex flex-wrap">
           {filteredProblems.map((problem) => (
             <CoursesCard
               key={problem.ctitle}

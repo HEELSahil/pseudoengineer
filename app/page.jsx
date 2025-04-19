@@ -77,7 +77,7 @@ export default function HomePage() {
   return (
     <>
       <section>
-        <div className="flex justify-center md:pr-20 lg:pr-0 xl:pr-60 lg:pt-10 text-4xl md:text-6xl lg:text-7xl font-extrabold underline bg-gradient-to-r bg-clip-text text-transparent from-indigo-500 via-purple-500 to-indigo-500 animate-text">
+        <div className="flex justify-center md:pr-20 lg:pr-0 xl:pr-60 lg:pt-10 text-4xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-indigo-500 via-purple-500 to-indigo-500 animate-text">
           From Pretend to Pro, Your Journey to Genuine Tech Mastery Starts Here
         </div>
         <p className="text-gray-500 dark:text-gray-400 text-lg pt-3 md:pb-6">
@@ -136,7 +136,7 @@ export default function HomePage() {
                   }`}
                 >
                   <span>{tag}</span>
-                  <span className="bg-gray-400 rounded-full px-2 text-xs">
+                  <span className="bg-gray-400 text-white rounded-full px-2 text-xs">
                     {count}
                   </span>
                 </button>
@@ -186,7 +186,7 @@ export default function HomePage() {
             </button>
           </div>
         </div>
-        <div className="flex flex-wrap -m-4">
+        <div className="flex flex-wrap -mt-7">
           {currentCourses.map((course) => (
             <SeriesCard
               key={course.id}
