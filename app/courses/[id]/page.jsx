@@ -22,6 +22,14 @@ export default function CourseList({ params }) {
     return <div>Course not found</div>;
   }
 
+  if (!course.folder) {
+    return (
+      <div className="font-medium">
+        This course currently has no content. Please visit back later!
+      </div>
+    );
+  }
+
   const problems = Object.values(course.folder);
 
   const filteredProblems = searchTerm

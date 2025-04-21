@@ -7,7 +7,6 @@ export const coursesList = [
       'Master the full stack framework that powers modern web apps, explained in the simplest way possible',
     imgSrc: '/static/images/nextjs.png',
     tags: ['NEXTJS', 'REACT'],
-    folder: {},
     // folder: {
     //     1: {
     //         cid:1,
@@ -58,7 +57,6 @@ export const coursesList = [
       'Data Structures and Algorithms, broken down into easy-to-digest lessons you will actually understand',
     imgSrc: '/static/images/data-structures-and-algorithms.png',
     tags: ['ALGORITHMS', 'DATA STRUCTURES'],
-    folder: {},
     // folder: {
     //   1: {
     //     cid: 1,
@@ -119,7 +117,6 @@ export const coursesList = [
       'Crack coding interviews with the simplest, most beginner-friendly LeetCode tutorials out there',
     imgSrc: '/static/images/leetcode-promotion.png',
     tags: ['ALGORITHMS', 'DATA STRUCTURES', 'LEETCODE'],
-    folder: {},
     // folder: {
     //   1: {
     //     cid: 1,

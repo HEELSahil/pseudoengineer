@@ -52,7 +52,17 @@ export default function TutorialPage({ params }) {
       </div>
     );
 
-  if (!tutorialData) return <p>Not found</p>;
+  if (
+    !tutorialData ||
+    !tutorialData.sections ||
+    tutorialData.sections.length === 0
+  ) {
+    return (
+      <div className="font-medium">
+        This series currently has no content. Please visit back later!
+      </div>
+    );
+  }
 
   // Count all tasks: either from lectures or directly from section
   const allTasks = Array.isArray(tutorialData.sections)
