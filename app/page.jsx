@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef } from 'react';
-import { coursesList } from '@data/coursesList';
+import { seriesList } from '@data/seriesList';
 import SeriesCard from '@components/SeriesCard';
 import usePageViewLogger from '@components/usePageViewLogger';
 
@@ -16,7 +16,7 @@ export default function HomePage() {
   const coursesRef = useRef(null);
 
   // Count occurrences of each tag
-  const tagCounts = coursesList
+  const tagCounts = seriesList
     .flatMap((course) => course.tags)
     .reduce((acc, tag) => {
       acc[tag] = (acc[tag] || 0) + 1;
@@ -29,18 +29,15 @@ export default function HomePage() {
     .map(([tag, count]) => ({ tag, count }));
 
   // Filter courses based on selected tag
-  const filteredCourses = selectedTag
-    ? coursesList.filter((course) => course.tags.includes(selectedTag))
-    : coursesList;
+  const filteredSeries = selectedTag
+    ? seriesList.filter((course) => course.tags.includes(selectedTag))
+    : seriesList;
 
   // Pagination logic
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentCourses = filteredCourses.slice(
-    indexOfFirstItem,
-    indexOfLastItem
-  );
-  const totalPages = Math.ceil(filteredCourses.length / itemsPerPage);
+  const currentSeries = filteredSeries.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = Math.ceil(filteredSeries.length / itemsPerPage);
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
@@ -187,7 +184,7 @@ export default function HomePage() {
           </div>
         </div>
         <div className="flex flex-wrap -mt-7">
-          {currentCourses.map((course) => (
+          {currentSeries.map((course) => (
             <SeriesCard
               key={course.id}
               id={course.id}

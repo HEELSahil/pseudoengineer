@@ -18,7 +18,7 @@ const SeriesCard = ({ id, title, slug, description, imgSrc }) => (
               <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
                 {title}
               </h2>
-              <p className="max-w-none text-gray-500 dark:text-gray-400">
+              <p className="max-w-none text-gray-500 dark:text-gray-400 font-medium">
                 {description}
               </p>
             </div>
