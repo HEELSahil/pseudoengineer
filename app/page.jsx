@@ -126,7 +126,7 @@ export default function HomePage() {
                     setSelectedTag(selectedTag === tag ? '' : tag);
                     setCurrentPage(1); // Reset to page 1 when changing the filter
                   }}
-                  className={`px-2 py-1 m-1 text-xs font-semibold rounded-full flex items-center space-x-1 ${
+                  className={`px-2 py-1 m-1 mb-2 text-xs font-semibold rounded-full flex items-center space-x-1 ${
                     selectedTag === tag
                       ? 'bg-black dark:bg-white text-white dark:text-black'
                       : 'hover:bg-black dark:hover:bg-white hover:text-white dark:hover:text-black'
