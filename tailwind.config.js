@@ -28,8 +28,8 @@ module.exports = {
         },
       },
       backgroundImage: (theme) => ({
-        'image-one': "url('https://assets.pseudoengineer.dev/logo-b.png')",
-        'image-two': "url('https://assets.pseudoengineer.dev/logo-wh.png')",
+        'image-one': "url('https://assets.pseudoengineer.dev/logo-b.svg')",
+        'image-two': "url('https://assets.pseudoengineer.dev/logo-wh.svg')",
         'homepage-black':
           "url('https://assets.pseudoengineer.dev/pseudoengineer_home_b.png')",
         'homepage-white':
