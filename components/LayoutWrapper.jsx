@@ -4,13 +4,15 @@ import Header from './Header';
 
 const LayoutWrapper = ({ children }) => {
   return (
-    <SectionContainer>
-      <div className="flex h-screen flex-col justify-between">
-        <Header />
-        <main className="mb-auto">{children}</main>
-        <Footer />
-      </div>
-    </SectionContainer>
+    <>
+      <Header />
+      <SectionContainer>
+        <div className="flex h-screen flex-col justify-between pt-24 md:pt-32">
+          <main className="mb-auto">{children}</main>
+          <Footer />
+        </div>
+      </SectionContainer>
+    </>
   );
 };
 
