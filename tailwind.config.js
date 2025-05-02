@@ -34,6 +34,7 @@ module.exports = {
           "url('https://assets.pseudoengineer.dev/pseudoengineer_home_b.png')",
         'homepage-white':
           "url('https://assets.pseudoengineer.dev/pseudoengineer_home_w.png')",
+        'auth-pattern': "url('/static/images/auth-bg.webp')",
       }),
       spacing: {
         '9/16': '56.25%',
