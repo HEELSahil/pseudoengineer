@@ -16,8 +16,10 @@
     "paths": {
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
-      "@data/*": ["./data/*"]
+      "@data/*": ["./data/*"],
+      "@lib/*": ["./lib/*"]
     },
+    "typeRoots": ["./types", "./node_modules/@types"],
     "plugins": [
       {
         "name": "next"

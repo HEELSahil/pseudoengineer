@@ -1,5 +1,8 @@
 'use client';
 
+import { signIn } from 'next-auth/react';
+import { registerUser } from '@/lib/actions/register';
+
 import { z } from 'zod';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -11,12 +14,13 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
 import FormField from './FormField';
+import { FormType } from '@/types';
 
 const authFormSchema = (type: FormType) => {
   return z.object({
-    name: type === 'sign-up' ? z.string().min(3) : z.string().optional(),
+    name: type === 'sign-up' ? z.string().min(2) : z.string().optional(),
     email: z.string().email(),
-    password: z.string().min(3),
+    password: z.string().min(5),
   });
 };
 
@@ -37,15 +41,34 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
       if (type === 'sign-up') {
-        toast.success('Account created successfully. Please sign in.');
+        const response = await registerUser(
+          data.name!,
+          data.email,
+          data.password
+        );
+        if (!response.success) {
+          toast.error(response.message);
+          return;
+        }
+        toast.success(response.message);
         router.push('/sign-in');
       } else {
-        toast.success('Signed in successfully.');
-        router.push('/');
+        const res = await signIn('credentials', {
+          redirect: false,
+          email: data.email,
+          password: data.password,
+        });
+
+        if (res?.error) {
+          toast.error('Invalid credentials');
+        } else {
+          toast.success('Signed in successfully.');
+          router.push('/');
+        }
       }
     } catch (error) {
-      console.error(error);
       toast.error(`There was an error: ${error}`);
+      console.error(error);
     }
   };
 
@@ -108,7 +131,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
       </div>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:justify-between">
-        <Button className="w-full flex items-center justify-center gap-2 py-6 text-white bg-[#11142B]">
+        <Button
+          className="w-full flex items-center justify-center gap-2 py-6 text-white bg-[#11142B]"
+          onClick={() => signIn('google', { callbackUrl: '/' })}
+        >
           <svg
             width="16"
             height="16"
@@ -170,7 +196,10 @@ const AuthForm = ({ type }: { type: FormType }) => {
           </svg>
           Log In with Google
         </Button>
-        <Button className="w-full flex items-center justify-center gap-2 py-6 text-white bg-[#11142B]">
+        <Button
+          className="w-full flex items-center justify-center gap-2 py-6 text-white bg-[#11142B]"
+          onClick={() => signIn('github', { callbackUrl: '/' })}
+        >
           <svg
             width="16"
             height="16"
