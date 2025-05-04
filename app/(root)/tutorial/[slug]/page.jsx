@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import AccordionSection from '@components/AccordionSection';
 import ContentTable from '@components/ContentTable';
 import SeriesCompletionTracker from '@components/SeriesCompletionTracker';
 
 export default function TutorialPage({ params }) {
+  const { data: session, status } = useSession();
   const [tutorialData, setTutorialData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState('');
 
-  const fetchData = async (userId) => {
+  const fetchData = async (userId = '') => {
     const res = await fetch(`/api/tutorials/${params.slug}`, {
       headers: {
         'x-user-id': userId,
@@ -23,14 +24,12 @@ export default function TutorialPage({ params }) {
   };
 
   useEffect(() => {
-    let id = localStorage.getItem('userId');
-    if (!id) {
-      id = crypto.randomUUID();
-      localStorage.setItem('userId', id);
+    if (status === 'authenticated' && session?.user?.id) {
+      fetchData(session.user.id);
+    } else if (status !== 'loading') {
+      fetchData();
     }
-    setUserId(id);
-    fetchData(id);
-  }, [params.slug]);
+  }, [status, session, params.slug]);
 
   if (loading)
     return (
@@ -64,7 +63,6 @@ export default function TutorialPage({ params }) {
     );
   }
 
-  // Count all tasks: either from lectures or directly from section
   const allTasks = Array.isArray(tutorialData.sections)
     ? tutorialData.sections.flatMap((section) => {
         if (Array.isArray(section.lectures) && section.lectures.length > 0) {
@@ -125,7 +123,8 @@ export default function TutorialPage({ params }) {
                     >
                       <ContentTable
                         tasks={lecture.tasks}
-                        onTaskToggle={() => fetchData(userId)}
+                        userId={session?.user?.id || null}
+                        onTaskToggle={() => fetchData(session?.user?.id)}
                       />
                     </AccordionSection>
                   );
@@ -133,7 +132,8 @@ export default function TutorialPage({ params }) {
               ) : (
                 <ContentTable
                   tasks={section.tasks}
-                  onTaskToggle={() => fetchData(userId)}
+                  userId={session?.user?.id || null}
+                  onTaskToggle={() => fetchData(session?.user?.id)}
                 />
               )}
             </AccordionSection>
