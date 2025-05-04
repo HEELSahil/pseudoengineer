@@ -23,22 +23,22 @@ export async function GET(
               include: {
                 tasks: {
                   include: {
-                    progress: userId
-                      ? {
-                          where: { userId },
-                        }
-                      : true,
+                    progress: {
+                      where: {
+                        userId: userId ?? '',
+                      },
+                    },
                   },
                 },
               },
             },
             tasks: {
               include: {
-                progress: userId
-                  ? {
-                      where: { userId },
-                    }
-                  : true,
+                progress: {
+                  where: {
+                    userId: userId ?? '',
+                  },
+                },
               },
             },
           },
