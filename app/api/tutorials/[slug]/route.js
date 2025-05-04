@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 
 export async function GET(request, { params }) {
   const { slug } = params;
-  const pseudoUserId = request.headers.get('x-user-id') || '';
+  const userId = request.headers.get('x-user-id') || '';
 
   try {
     const tutorial = await prisma.tutorial.findUnique({
@@ -18,7 +18,7 @@ export async function GET(request, { params }) {
                   include: {
                     progress: {
                       where: {
-                        pseudoUserId,
+                        userId,
                       },
                     },
                   },
@@ -30,7 +30,7 @@ export async function GET(request, { params }) {
               include: {
                 progress: {
                   where: {
-                    pseudoUserId,
+                    userId,
                   },
                 },
               },

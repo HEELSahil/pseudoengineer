@@ -64,15 +64,15 @@ model Task {
 
 // (Temporary) Local User Progress (to be replaced with actual auth later)
 model Progress {
-  id           Int     @id @default(autoincrement())
-  pseudoUserId String
-  taskId       Int
-  completed    Boolean @default(false)
+  id        Int     @id @default(autoincrement())
+  userId    String
+  taskId    Int
+  completed Boolean @default(false)
 
   task Task  @relation(fields: [taskId], references: [id])
-  user User? @relation(fields: [pseudoUserId], references: [id])
+  user User? @relation(fields: [userId], references: [id])
 
-  @@unique([pseudoUserId, taskId])
+  @@unique([userId, taskId])
 }
 
 model User {

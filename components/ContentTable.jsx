@@ -12,7 +12,7 @@ const ContentTable = ({ tasks, onTaskToggle }) => {
   );
 
   const toggleCheckbox = async (taskId, checked) => {
-    const pseudoUserId = localStorage.getItem('pseudoUserId');
+    const userId = localStorage.getItem('userId');
 
     await fetch('/api/progress', {
       method: 'POST',
@@ -21,7 +21,7 @@ const ContentTable = ({ tasks, onTaskToggle }) => {
       },
       body: JSON.stringify({
         taskId,
-        pseudoUserId,
+        userId,
         completed: checked,
       }),
     });

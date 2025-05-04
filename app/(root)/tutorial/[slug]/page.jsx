@@ -8,7 +8,7 @@ import SeriesCompletionTracker from '@components/SeriesCompletionTracker';
 export default function TutorialPage({ params }) {
   const [tutorialData, setTutorialData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [pseudoUserId, setPseudoUserId] = useState('');
+  const [userId, setUserId] = useState('');
 
   const fetchData = async (userId) => {
     const res = await fetch(`/api/tutorials/${params.slug}`, {
@@ -23,12 +23,12 @@ export default function TutorialPage({ params }) {
   };
 
   useEffect(() => {
-    let id = localStorage.getItem('pseudoUserId');
+    let id = localStorage.getItem('userId');
     if (!id) {
       id = crypto.randomUUID();
-      localStorage.setItem('pseudoUserId', id);
+      localStorage.setItem('userId', id);
     }
-    setPseudoUserId(id);
+    setUserId(id);
     fetchData(id);
   }, [params.slug]);
 
@@ -125,7 +125,7 @@ export default function TutorialPage({ params }) {
                     >
                       <ContentTable
                         tasks={lecture.tasks}
-                        onTaskToggle={() => fetchData(pseudoUserId)}
+                        onTaskToggle={() => fetchData(userId)}
                       />
                     </AccordionSection>
                   );
@@ -133,7 +133,7 @@ export default function TutorialPage({ params }) {
               ) : (
                 <ContentTable
                   tasks={section.tasks}
-                  onTaskToggle={() => fetchData(pseudoUserId)}
+                  onTaskToggle={() => fetchData(userId)}
                 />
               )}
             </AccordionSection>

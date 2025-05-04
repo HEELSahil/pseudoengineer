@@ -48,7 +48,7 @@ CREATE TABLE "Task" (
 -- CreateTable
 CREATE TABLE "Progress" (
     "id" SERIAL NOT NULL,
-    "pseudoUserId" TEXT NOT NULL,
+    "userId" TEXT NOT NULL,
     "taskId" INTEGER NOT NULL,
     "completed" BOOLEAN NOT NULL DEFAULT false,
 
@@ -60,7 +60,7 @@ CREATE UNIQUE INDEX "Tutorial_slug_key" ON "Tutorial"("slug");
 CREATE UNIQUE INDEX "Section_slug_key" ON "Section"("slug");
 CREATE UNIQUE INDEX "Lecture_slug_key" ON "Lecture"("slug");
 CREATE UNIQUE INDEX "Task_slug_key" ON "Task"("slug");
-CREATE UNIQUE INDEX "Progress_pseudoUserId_taskId_key" ON "Progress"("pseudoUserId", "taskId");
+CREATE UNIQUE INDEX "Progress_userId_taskId_key" ON "Progress"("userId", "taskId");
 
 -- Foreign Keys
 ALTER TABLE "Section" ADD CONSTRAINT "Section_tutorialId_fkey" FOREIGN KEY ("tutorialId") REFERENCES "Tutorial"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

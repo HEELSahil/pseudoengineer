@@ -4,20 +4,36 @@ const prisma = new PrismaClient();
 
 export async function POST(req) {
   try {
-    const { taskId, pseudoUserId, completed } = await req.json();
+    const { taskId, userId, completed } = await req.json();
 
-    if (!taskId || !pseudoUserId) {
+    if (!taskId || !userId) {
       return new Response(
-        JSON.stringify({ error: 'Missing taskId or pseudoUserId' }),
+        JSON.stringify({ error: 'Missing taskId or userId' }),
         { status: 400 }
       );
+    }
+
+    const userExists = await prisma.user.findUnique({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!userExists) {
+      // Create the user first
+      await prisma.user.create({
+        data: {
+          id: userId,
+          name: `Anonymous ${userId.substring(0, 6)}`,
+        },
+      });
     }
 
     // Upsert: insert if not exists, update if it does
     const progress = await prisma.progress.upsert({
       where: {
-        pseudoUserId_taskId: {
-          pseudoUserId,
+        userId_taskId: {
+          userId,
           taskId,
         },
       },
@@ -25,7 +41,7 @@ export async function POST(req) {
         completed,
       },
       create: {
-        pseudoUserId,
+        userId,
         taskId,
         completed,
       },
