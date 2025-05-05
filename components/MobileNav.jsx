@@ -2,7 +2,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import headerNavLinks from '../data/headerNavLinks';
-import AuthButton from './AuthButton';
 
 const MobileNav = () => {
   const [navShow, setNavShow] = useState(false);
@@ -87,11 +86,6 @@ const MobileNav = () => {
                 </Link>
               </div>
             ))}
-            <div className="fixed bottom-10 left-0 w-full px-10">
-              <div className="py-4">
-                <AuthButton />
-              </div>
-            </div>
           </div>
         </nav>
       </div>

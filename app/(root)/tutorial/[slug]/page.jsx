@@ -78,7 +78,7 @@ export default function TutorialPage({ params }) {
 
   return (
     <div className="w-full px-4 py-6">
-      <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-11 mb-2 text-gray-900 bg-gradient-to-r bg-clip-text text-transparent from-lime-500 via-emerald-500 to-lime-500 animate-text">
+      <h1 className="text-4xl md:text-5xl xl:text-6xl font-extrabold tracking-wide leading-11 pb-2 text-gray-900 bg-gradient-to-r bg-clip-text text-transparent from-lime-500 via-emerald-500 to-lime-500 animate-text">
         {tutorialData.title}
       </h1>
       <p className="text-lg pt-2 mb-6 text-gray-500 dark:text-gray-400">

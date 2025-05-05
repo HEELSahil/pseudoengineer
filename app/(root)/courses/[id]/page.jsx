@@ -24,7 +24,7 @@ export default function CourseList({ params }) {
 
   if (!course.folder) {
     return (
-      <div className="font-medium">
+      <div className="font-medium text-center pt-2">
         This course currently has no content. Please visit back later!
       </div>
     );

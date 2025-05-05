@@ -1,5 +1,6 @@
 import { SessionWrapper } from '@/components/SessionWrapper';
 import { Toaster } from 'sonner';
+import '@/styles/globals.css';
 
 export default function RootLayout({ children }) {
   return (
