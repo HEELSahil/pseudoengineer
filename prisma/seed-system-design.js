@@ -92,6 +92,7 @@ module.exports = async function seedSystemDesign(prisma) {
           data: {
             ...taskData,
             sectionId: section.id,
+            tutorialId: tutorial.id,
           },
         });
       } else {
@@ -100,6 +101,7 @@ module.exports = async function seedSystemDesign(prisma) {
           data: {
             ...taskData,
             sectionId: section.id, // reassign to correct section
+            tutorialId: tutorial.id,
           },
         });
       }

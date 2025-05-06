@@ -186,6 +186,7 @@ module.exports = async function seedDataStructures(prisma) {
             data: {
               ...taskData,
               lectureId: lecture.id,
+              tutorialId: tutorial.id,
             },
           });
         } else {
@@ -194,6 +195,7 @@ module.exports = async function seedDataStructures(prisma) {
             data: {
               ...taskData,
               lectureId: lecture.id,
+              tutorialId: tutorial.id,
             },
           });
         }

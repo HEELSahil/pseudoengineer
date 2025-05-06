@@ -35,6 +35,7 @@ CREATE TABLE "Task" (
     "id" SERIAL NOT NULL,
     "lectureId" INTEGER,
     "sectionId" INTEGER,
+    "tutorialId" INTEGER,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "difficulty" TEXT NOT NULL DEFAULT 'Easy',
@@ -70,5 +71,7 @@ ALTER TABLE "Lecture" ADD CONSTRAINT "Lecture_sectionId_fkey" FOREIGN KEY ("sect
 ALTER TABLE "Task" ADD CONSTRAINT "Task_lectureId_fkey" FOREIGN KEY ("lectureId") REFERENCES "Lecture"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE "Task" ADD CONSTRAINT "Task_sectionId_fkey" FOREIGN KEY ("sectionId") REFERENCES "Section"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+ALTER TABLE "Task" ADD CONSTRAINT "Task_tutorialId_fkey" FOREIGN KEY ("tutorialId") REFERENCES "Tutorial"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 ALTER TABLE "Progress" ADD CONSTRAINT "Progress_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "Task"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

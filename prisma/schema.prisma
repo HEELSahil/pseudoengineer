@@ -20,6 +20,7 @@ model Tutorial {
   title       String
   description String
   sections    Section[]
+  tasks       Task[]
 }
 
 // Outer Accordion
@@ -59,10 +60,12 @@ model Task {
   section   Section? @relation(fields: [sectionId], references: [id])
   sectionId Int?
 
-  progress Progress[] // each task can have many progress entries
+  tutorial   Tutorial? @relation(fields: [tutorialId], references: [id])
+  tutorialId Int?
+
+  progress Progress[]
 }
 
-// (Temporary) Local User Progress (to be replaced with actual auth later)
 model Progress {
   id        Int     @id @default(autoincrement())
   userId    String
