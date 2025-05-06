@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import siteMetadata from '@data/siteMetadata';
-import headerNavLinks from '@data/headerNavLinks';
+import footerNavLinks from '@data/footerNavLinks';
 
 export default function Footer() {
   return (
@@ -99,7 +99,7 @@ export default function Footer() {
         </div>
 
         <div className="flex flex-wrap justify-center text-sm leading-5 text-gray-400">
-          {headerNavLinks.map((link, index) => (
+          {footerNavLinks.map((link, index) => (
             <div key={link.title} className="flex items-center">
               <Link
                 href={link.href}
@@ -107,7 +107,7 @@ export default function Footer() {
               >
                 {link.title}
               </Link>
-              {index !== headerNavLinks.length - 1 && (
+              {index !== footerNavLinks.length - 1 && (
                 <span className="px-5 md:px-4 text-gray-400">|</span>
               )}
             </div>
