@@ -3,22 +3,31 @@
 import { useState } from 'react';
 import { FaYoutube, FaCode, FaBook } from 'react-icons/fa';
 import SignInPromptModal from './SignInPromptModal';
+import VideoModal from './VideoModal';
+import RulesModal from './RulesModal';
 
 const ContentTable = ({ tasks, userId, onTaskToggle }) => {
   const [taskStates, setTaskStates] = useState(() =>
     tasks.map((task) => ({
       id: task.id,
       completed: task.progress?.[0]?.completed || false,
+      unlocked: task.progress?.[0]?.completed || false,
     }))
   );
 
   const [showModal, setShowModal] = useState(false);
+  const [showVideoModal, setShowVideoModal] = useState(false);
+  const [activeTaskId, setActiveTaskId] = useState(null);
+  const [showRules, setShowRules] = useState(userId ? true : false);
 
   const toggleCheckbox = async (taskId, checked) => {
     if (!userId) {
       setShowModal(true);
       return;
     }
+
+    const isUnlocked = taskStates.find((t) => t.id === taskId)?.unlocked;
+    if (!isUnlocked) return;
 
     await fetch('/api/progress', {
       method: 'POST',
@@ -41,11 +50,28 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
     if (onTaskToggle) onTaskToggle();
   };
 
+  const handleVideoStart = (taskId) => {
+    setTaskStates((prev) =>
+      prev.map((task) =>
+        task.id === taskId ? { ...task, unlocked: true } : task
+      )
+    );
+  };
+
   return (
     <>
+      <RulesModal isOpen={showRules} onClose={() => setShowRules(false)} />
       <SignInPromptModal
         isOpen={showModal}
         onClose={() => setShowModal(false)}
+      />
+      <VideoModal
+        isOpen={showVideoModal}
+        onClose={() => setShowVideoModal(false)}
+        onVideoPlay={() => handleVideoStart(activeTaskId)}
+        youtubeUrl={
+          tasks.find((task) => task.id === activeTaskId)?.youtubeUrl || ''
+        }
       />
       <div className="overflow-x-auto mt-2">
         <table className="min-w-full table-auto border border-zinc-200 dark:border-zinc-800 text-sm rounded-xl overflow-hidden">
@@ -72,6 +98,7 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
           <tbody className="bg-white dark:bg-zinc-900 text-gray-800 dark:text-gray-300">
             {tasks.map((task) => {
               const localState = taskStates.find((t) => t.id === task.id);
+              const isDisabled = !localState?.unlocked && userId;
               return (
                 <tr
                   key={task.id}
@@ -80,9 +107,13 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800 text-center align-middle">
                     <div
                       onClick={() =>
+                        !isDisabled &&
                         toggleCheckbox(task.id, !localState?.completed)
                       }
-                      className={`mx-auto w-5 h-5 rounded-md border-2 flex items-center justify-center cursor-pointer transition-colors duration-200
+                      title={isDisabled ? 'Watch video to unlock' : ''}
+                      className={`mx-auto w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors duration-200 cursor-${
+                        isDisabled ? 'not-allowed' : 'pointer'
+                      }
                         ${
                           localState?.completed
                             ? 'bg-emerald-600 border-emerald-500'
@@ -126,14 +157,15 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800">
                     {task.youtubeUrl && (
                       <div className="flex justify-center items-center">
-                        <a
-                          href={task.youtubeUrl}
+                        <button
                           className="text-red-500 text-xl"
-                          target="_blank"
-                          rel="noreferrer"
+                          onClick={() => {
+                            setActiveTaskId(task.id);
+                            setShowVideoModal(true);
+                          }}
                         >
                           <FaYoutube />
-                        </a>
+                        </button>
                       </div>
                     )}
                   </td>
