@@ -4,7 +4,7 @@ import { logger } from '@/lib/logger';
 
 export const createVerificationToken = async (userId: string) => {
   const token = uuidv4();
-  const expiresAt = new Date(Date.now() + 1000 * 60); // 1 minute expiry
+  const expiresAt = new Date(Date.now() + 1000 * 60 * 10); // 10 minutes expiry
 
   await prisma.verificationToken.deleteMany({
     where: { userId },

@@ -53,7 +53,7 @@ export const authOptions: AuthOptions = {
   ],
   session: {
     strategy: 'jwt',
-    maxAge: 60,
+    maxAge: 259200,
   },
   callbacks: {
     async signIn({ user }) {
@@ -87,7 +87,7 @@ export const authOptions: AuthOptions = {
       if (user) {
         token.id = user.id;
         const now = Math.floor(Date.now() / 1000);
-        token.absoluteExpiry = now + 60;
+        token.absoluteExpiry = now + 259200;
         if (process.env.NODE_ENV === 'development') {
           if (typeof token.absoluteExpiry === 'number') {
             console.log(
