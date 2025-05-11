@@ -2,6 +2,8 @@
 
 import { signIn } from 'next-auth/react';
 import { registerUser } from '@/lib/actions/register';
+import { checkEmailVerification, checkUserExists } from '@/lib/auth-helpers';
+// import { passwordSchema } from '@/lib/validators';
 
 import { z } from 'zod';
 import Link from 'next/link';
@@ -10,6 +12,7 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 
 import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
@@ -20,7 +23,11 @@ const authFormSchema = (type: FormType) => {
   return z.object({
     name: type === 'sign-up' ? z.string().min(2) : z.string().optional(),
     email: z.string().email(),
-    password: z.string().min(5),
+    password: z.string().min(8),
+    // password:
+    //   type === 'sign-up'
+    //     ? passwordSchema
+    //     : z.string().min(8, 'Invalid credentials'),
   });
 };
 
@@ -28,6 +35,7 @@ const AuthForm = ({ type }: { type: FormType }) => {
   const router = useRouter();
   const isSignIn = type === 'sign-in';
   const formSchema = authFormSchema(type);
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -40,19 +48,36 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     try {
+      setIsLoading(true);
       if (type === 'sign-up') {
         const response = await registerUser(
           data.name!,
           data.email,
-          data.password
+          data.password,
         );
         if (!response.success) {
           toast.error(response.message);
           return;
         }
-        toast.success(response.message);
+        toast.success(response.message, {
+          duration: Infinity,
+          dismissible: true,
+        });
         router.push('/sign-in');
       } else {
+        const userExists = await checkUserExists(data.email);
+
+        if (!userExists) {
+          toast.error('Account not found. Please create a new account.');
+          return;
+        }
+
+        const isVerified = await checkEmailVerification(data.email);
+        if (!isVerified) {
+          toast.error('Please verify your email before signing in.');
+          return;
+        }
+
         const res = await signIn('credentials', {
           redirect: false,
           email: data.email,
@@ -60,7 +85,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
         });
 
         if (res?.error) {
-          toast.error('Invalid credentials');
+          console.log('Sign-in error:', res.error);
+          toast.error('Invalid credentials. Please check your password.');
         } else {
           toast.success('Signed in successfully.');
           router.push('/');
@@ -69,6 +95,8 @@ const AuthForm = ({ type }: { type: FormType }) => {
     } catch (error) {
       toast.error(`There was an error: ${error}`);
       console.error(error);
+    } finally {
+      setIsLoading(false); // Reset loading state regardless of outcome
     }
   };
 
@@ -118,8 +146,37 @@ const AuthForm = ({ type }: { type: FormType }) => {
           <Button
             className="w-full bg-sky-500 text-dark-100 font-semibold py-5 rounded-md"
             type="submit"
+            disabled={isLoading}
           >
-            {isSignIn ? 'Sign In' : 'Create an account'}
+            {isLoading ? (
+              <span className="flex items-center justify-center">
+                <svg
+                  className="animate-spin -ml-1 mr-2 h-5 w-5 text-dark-100"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
+                </svg>
+                {isSignIn ? 'Signing In...' : 'Creating account...'}
+              </span>
+            ) : isSignIn ? (
+              'Sign In'
+            ) : (
+              'Create an account'
+            )}
           </Button>
         </form>
       </Form>

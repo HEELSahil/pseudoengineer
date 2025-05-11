@@ -79,15 +79,16 @@ model Progress {
 }
 
 model User {
-  id            String     @id @default(cuid())
-  name          String?
-  email         String?    @unique
-  emailVerified DateTime?
-  password      String? // For credentials auth
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  progress      Progress[]
+  id                 String              @id @default(cuid())
+  name               String?
+  email              String?             @unique
+  emailVerified      DateTime?
+  password           String? // For credentials auth
+  image              String?
+  accounts           Account[]
+  sessions           Session[]
+  progress           Progress[]
+  verificationTokens VerificationToken[]
 }
 
 model Account {
@@ -116,4 +117,16 @@ model Session {
   expires      DateTime
 
   user User @relation(fields: [userId], references: [id])
+}
+
+model VerificationToken {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expiresAt])
 }

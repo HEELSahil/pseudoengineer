@@ -31,9 +31,13 @@ export const authOptions: AuthOptions = {
 
         if (!user || !user.password) return null;
 
+        if (!user.emailVerified) {
+          return null;
+        }
+
         const isValid = await bcrypt.compare(
           credentials.password,
-          user.password
+          user.password,
         );
         return isValid ? user : null;
       },
@@ -52,6 +56,20 @@ export const authOptions: AuthOptions = {
     maxAge: 60,
   },
   callbacks: {
+    async signIn({ user }) {
+      const dbUser = await prisma.user.findUnique({
+        where: { email: user.email! },
+      });
+
+      if (dbUser && !dbUser.emailVerified) {
+        // 👇 Redirect to sign-in page with a custom error
+        const url = new URL('/sign-in', process.env.NEXTAUTH_URL);
+        url.searchParams.set('error', 'EmailNotVerified');
+        throw new Error(`NEXT_REDIRECT:${url.toString()}`);
+      }
+
+      return true;
+    },
     async session({ session, token }) {
       const t = token as ExtendedJWT;
 
@@ -59,7 +77,7 @@ export const authOptions: AuthOptions = {
         session.user.id = t.sub as string;
 
         session.expires = new Date(
-          (t.absoluteExpiry ?? t.exp ?? Date.now() / 1000) * 1000
+          (t.absoluteExpiry ?? t.exp ?? Date.now() / 1000) * 1000,
         ).toISOString();
       }
 
@@ -74,12 +92,12 @@ export const authOptions: AuthOptions = {
           if (typeof token.absoluteExpiry === 'number') {
             console.log(
               'Token absolute expiry set to:',
-              new Date(token.absoluteExpiry * 1000)
+              new Date(token.absoluteExpiry * 1000),
             );
           } else {
             console.log(
               'absoluteExpiry is not set or not a number:',
-              token.absoluteExpiry
+              token.absoluteExpiry,
             );
           }
         }

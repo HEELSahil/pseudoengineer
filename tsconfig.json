@@ -17,7 +17,8 @@
       "@/*": ["./*"],
       "@components/*": ["./components/*"],
       "@data/*": ["./data/*"],
-      "@lib/*": ["./lib/*"]
+      "@lib/*": ["./lib/*"],
+      "@emails/*": ["./emails/*"]
     },
     "typeRoots": ["./types", "./node_modules/@types"],
     "plugins": [
