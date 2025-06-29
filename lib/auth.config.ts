@@ -1,4 +1,5 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
+import type { User as PrismaUser } from '@prisma/client';
 import { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
@@ -110,7 +111,19 @@ export const authOptions: AuthOptions = {
     },
   },
   events: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
+      const typedUser = user as PrismaUser;
+      if (
+        account?.provider !== 'credentials' &&
+        typedUser.email &&
+        !typedUser.emailVerified
+      ) {
+        await prisma.user.update({
+          where: { email: typedUser.email },
+          data: { emailVerified: new Date() },
+        });
+      }
+
       if (process.env.NODE_ENV === 'development') {
         console.log('User signed in:', user.email);
       }
