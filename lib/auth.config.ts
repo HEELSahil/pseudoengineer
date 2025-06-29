@@ -56,12 +56,16 @@ export const authOptions: AuthOptions = {
     maxAge: 259200,
   },
   callbacks: {
-    async signIn({ user }) {
+    async signIn({ user, account }) {
       const dbUser = await prisma.user.findUnique({
         where: { email: user.email! },
       });
 
-      if (dbUser && !dbUser.emailVerified) {
+      if (
+        dbUser &&
+        !dbUser.emailVerified &&
+        account?.provider === 'credentials'
+      ) {
         // 👇 Redirect to sign-in page with a custom error
         const url = new URL('/sign-in', process.env.NEXTAUTH_URL);
         url.searchParams.set('error', 'EmailNotVerified');
