@@ -2,23 +2,40 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'assets.pseudoengineer.dev' },
+    ],
+    minimumCacheTTL: 60 * 60 * 24 * 365,
+  },
+
   async headers() {
     return [
       {
-        source: '/(.*)',
+        source: '/:all*.(png|jpg|jpeg|gif|webp|avif|svg|ico)',
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
+        ],
+      },
+      {
+        source: '/_next/static/:path*',
+        headers: [
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
+        ],
+      },
+      {
+        source: '/(.*)',
+        headers: [
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'X-XSS-Protection', value: '1; mode=block' },
           {
             key: 'x-metadata-base',
             value:

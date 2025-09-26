@@ -101,9 +101,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
 
   return (
     <div className="w-full max-w-[540px] space-y-6 p-8 md:p-10 rounded-xl bg-dark-200 shadow-xl backdrop-blur">
-      <Link href="/">
+      <Link href="/" aria-label="pseudoEngineer logo">
         <div className="flex items-center justify-center">
-          <div className="mr-3 bg-image-two dark:bg-image-two h-16 w-64 bg-cover" />
+          <div
+            aria-hidden="true"
+            className="mr-3 bg-image-two dark:bg-image-two h-16 w-64 bg-cover"
+          />
         </div>
       </Link>
 

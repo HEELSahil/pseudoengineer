@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import { useState, useRef } from 'react';
 import { seriesList } from '@data/seriesList';
 import SeriesCard from '@components/SeriesCard';
@@ -108,7 +110,29 @@ export default function HomePage() {
           </button>
           <div className="absolute inset-x-0 top-full mt-[-49px] mr-[-7px] mx-auto w-[292px] md:w-[315px] h-14 bg-gray-300 rounded-md shadow-lg -z-50"></div>
         </div>
-        <div className="bg-homepage-black dark:bg-homepage-white bg-cover w-80 md:w-72 pb-72 mt-14 md:mt-[-60px] m-0 self-center"></div>
+        <div className="relative w-80 md:w-72 pb-52 md:pb-72 mt-14 -mb-8 md:-mb-0 pt-28 md:pt-0 md:mt-[-60px] m-0 self-center">
+          <Image
+            src="/static/images/pseudoengineer_home_b.png"
+            alt="pseudoEngineer image"
+            fill
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBOR..."
+            priority
+            fetchPriority="high"
+            className="object-cover dark:hidden rounded-md"
+          />
+
+          <Image
+            src="/static/images/pseudoengineer_home_w.png"
+            alt="pseudoEngineer image"
+            fill
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBOR..."
+            priority
+            fetchPriority="high"
+            className="object-cover hidden dark:block rounded-md"
+          />
+        </div>
       </section>
 
       <section ref={coursesRef} className="container mx-auto py-12">

@@ -16,7 +16,7 @@ export default function Footer() {
               className="text-sm text-gray-500 transition hover:text-gray-600"
             >
               <svg
-                className="fill-current text-gray-700 hover:text-red-500 dark:text-gray-200 dark:hover:text-red-500 w-5 h-5"
+                className="fill-current text-gray-700 hover:text-red-500 dark:text-gray-100 dark:hover:text-red-500 w-6 h-6"
                 role="img"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -28,7 +28,7 @@ export default function Footer() {
             </a>
             <a href={siteMetadata.twitter} target="_blank">
               <svg
-                className="fill-current text-gray-700 hover:text-blue-500 dark:text-gray-200 dark:hover:text-blue-500 w-5 h-5"
+                className="fill-current text-gray-700 hover:text-blue-500 dark:text-gray-100 dark:hover:text-blue-500 w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -40,7 +40,7 @@ export default function Footer() {
             <a href={siteMetadata.linkedin} target="_blank">
               {/* <svg className="fill-current text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-600 w-5 h-5" role="img" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg"><title>LinkedIn</title><path d="M184.715 217.685h29.27a4 4 0 0 0 4-3.999l.015-61.842c0-32.323-6.965-57.168-44.738-57.168c-14.359-.534-27.9 6.868-35.207 19.228a.32.32 0 0 1-.595-.161V101.66a4 4 0 0 0-4-4h-27.777a4 4 0 0 0-4 4v112.02a4 4 0 0 0 4 4h29.268a4 4 0 0 0 4-4v-55.373c0-15.657 2.97-30.82 22.381-30.82c19.135 0 19.383 17.916 19.383 31.834v54.364a4 4 0 0 0 4 4M38 59.628c0 11.864 9.767 21.626 21.632 21.626c11.862-.001 21.623-9.769 21.623-21.631C81.253 47.761 71.491 38 59.628 38C47.762 38 38 47.763 38 59.627m6.959 158.058h29.307a4 4 0 0 0 4-4V101.66a4 4 0 0 0-4-4H44.959a4 4 0 0 0-4 4v112.025a4 4 0 0 0 4 4"/></svg> */}
               <svg
-                className="fill-current text-gray-700 hover:text-blue-600 dark:text-gray-200 dark:hover:text-blue-600 w-[18px] h-[18px] pt-[2px]"
+                className="fill-current text-gray-700 hover:text-blue-600 dark:text-gray-100 dark:hover:text-blue-600 w-[22px] h-[22px] pt-[2px]"
                 role="img"
                 viewBox="0 0 24 24"
                 xmlns="http://www.w3.org/2000/svg"
@@ -53,7 +53,7 @@ export default function Footer() {
             </a>
             <a href={siteMetadata.instagram} target="_blank">
               <svg
-                className="fill-current text-gray-700 hover:text-pink-500 dark:text-gray-200 dark:hover:text-pink-500 w-5 h-5"
+                className="fill-current text-gray-700 hover:text-pink-500 dark:text-gray-100 dark:hover:text-pink-500 w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -68,7 +68,7 @@ export default function Footer() {
             </a>
             <a href={siteMetadata.github} target="_blank">
               <svg
-                className="fill-current text-gray-700 hover:text-green-500 dark:text-gray-200 dark:hover:text-green-500 w-5 h-5"
+                className="fill-current text-gray-700 hover:text-green-500 dark:text-gray-100 dark:hover:text-green-500 w-6 h-6"
                 fill="currentColor"
                 viewBox="0 0 24 24"
                 aria-hidden="true"
@@ -85,13 +85,19 @@ export default function Footer() {
         </div>
         <Link href="/" aria-label={siteMetadata.initial}>
           <div className="flex items-center justify-between">
-            <div className="mr-3 bg-image-one dark:bg-image-two h-16 w-64 bg-cover">
+            <div className="bg-image-one dark:bg-image-two h-16 w-64 bg-cover">
               {/* <img className='h-20 w-80 logo-switch' src="https://heelsahil.com/logo-w.png" width='50' height='100' alt=''></img> */}
             </div>
           </div>
         </Link>
-        <div className="mb-3 -mt-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400">
-          <Link href="/">{siteMetadata.title}</Link>
+        <div className="mb-3 flex space-x-2 text-sm text-gray-600 dark:text-white">
+          <Link
+            href="/"
+            className="relative inline-block focus:outline-none focus:ring-2 focus:ring-primary-500"
+          >
+            {siteMetadata.title}
+            <span aria-hidden="true" className="absolute inset-0 -m-2" />
+          </Link>
           <div>{` • `}</div>
           <div>{`© ${new Date().getFullYear()}`}</div>
           <div>{` • `}</div>
@@ -103,7 +109,7 @@ export default function Footer() {
             <div key={link.title} className="flex items-center">
               <Link
                 href={link.href}
-                className="p-1 font-semibold underline text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white sm:px-4"
+                className="p-1 font-semibold text-gray-600 dark:text-white hover:text-black hover:underline sm:px-4"
               >
                 {link.title}
               </Link>
