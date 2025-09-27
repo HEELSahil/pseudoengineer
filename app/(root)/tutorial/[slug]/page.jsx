@@ -1,12 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, use } from 'react';
 import { useSession } from 'next-auth/react';
 import AccordionSection from '@components/AccordionSection';
 import ContentTable from '@components/ContentTable';
 import SeriesCompletionTracker from '@components/SeriesCompletionTracker';
 
-export default function TutorialPage({ params }) {
+export default function TutorialPage(props) {
+  const params = use(props.params);
   const { data: session, status } = useSession();
   const [tutorialData, setTutorialData] = useState(null);
   const [loading, setLoading] = useState(true);

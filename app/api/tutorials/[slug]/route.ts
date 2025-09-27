@@ -5,10 +5,8 @@ import { NextRequest, NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  _req: NextRequest,
-  { params }: { params: { slug: string } }
-) {
+export async function GET(_req: NextRequest, props: { params: Promise<{ slug: string }> }) {
+  const params = await props.params;
   const session = await getServerSession(authOptions);
   const userId = session?.user?.id || null;
   const { slug } = params;

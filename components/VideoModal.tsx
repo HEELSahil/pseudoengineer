@@ -4,12 +4,19 @@ import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { IoMdClose } from 'react-icons/io';
 
-const VideoModal = ({ isOpen, onClose, onVideoPlay, youtubeUrl }) => {
-  const modalRef = useRef(null);
+type Props = {
+  isOpen: boolean;
+  onClose: () => void;
+  youtubeUrl: string;
+};
 
+export default function VideoModal({ isOpen, onClose, youtubeUrl }: Props) {
+  const modalRef = useRef<HTMLDivElement | null>(null);
+
+  // Close when clicking outside
   useEffect(() => {
-    const handleClickOutside = (e) => {
-      if (modalRef.current && !modalRef.current.contains(e.target)) {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
         onClose();
       }
     };
@@ -17,16 +24,10 @@ const VideoModal = ({ isOpen, onClose, onVideoPlay, youtubeUrl }) => {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen, onClose]);
 
-  useEffect(() => {
-    if (isOpen && onVideoPlay) {
-      onVideoPlay();
-    }
-  }, [isOpen, onVideoPlay]);
-
   if (!isOpen) return null;
 
   return createPortal(
-    <div className="fixed inset-0 bg-black bg-opacity-30 backdrop-blur-sm flex items-center justify-center z-50">
+    <div className="fixed inset-0 bg-black/30 backdrop-blur-sm flex items-center justify-center z-50">
       <div
         ref={modalRef}
         className="bg-white dark:bg-zinc-900 rounded-lg shadow-lg max-w-3xl w-full p-4 relative"
@@ -37,7 +38,6 @@ const VideoModal = ({ isOpen, onClose, onVideoPlay, youtubeUrl }) => {
         >
           <IoMdClose size={24} />
         </button>
-
         <div className="aspect-video w-full rounded overflow-hidden">
           <iframe
             className="w-full h-full"
@@ -50,8 +50,6 @@ const VideoModal = ({ isOpen, onClose, onVideoPlay, youtubeUrl }) => {
         </div>
       </div>
     </div>,
-    document.body
+    document.body,
   );
-};
-
-export default VideoModal;
+}

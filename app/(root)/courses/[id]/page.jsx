@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use } from 'react';
 import { coursesList } from '@data/coursesList';
 import CoursesCard from '@components/CoursesCard';
 import usePageViewLogger from '@components/usePageViewLogger';
 
-export default function CourseList({ params }) {
+export default function CourseList(props) {
+  const params = use(props.params);
   const [searchTerm, setSearchTerm] = useState('');
   const slug = String(params.id);
   // const pathname = usePathname(); // Get the current path, e.g., "/courses/mern-stack" (i can use this method as well to get the slug instead of doing const slug = String(params.id);)

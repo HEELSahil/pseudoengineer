@@ -6,56 +6,46 @@ import SignInPromptModal from './SignInPromptModal';
 import VideoModal from './VideoModal';
 import RulesModal from './RulesModal';
 
-const ContentTable = ({ tasks, userId, onTaskToggle }) => {
+export default function ContentTable({ tasks, userId, onTaskToggle }) {
   const [taskStates, setTaskStates] = useState(() =>
     tasks.map((task) => ({
       id: task.id,
       completed: task.progress?.[0]?.completed || false,
       unlocked: task.progress?.[0]?.completed || false,
-    }))
+    })),
   );
-
   const [showModal, setShowModal] = useState(false);
   const [showVideoModal, setShowVideoModal] = useState(false);
   const [activeTaskId, setActiveTaskId] = useState(null);
-  const [showRules, setShowRules] = useState(userId ? true : false);
+  const [showRules, setShowRules] = useState(Boolean(userId));
 
   const toggleCheckbox = async (taskId, checked) => {
     if (!userId) {
       setShowModal(true);
       return;
     }
-
     const isUnlocked = taskStates.find((t) => t.id === taskId)?.unlocked;
     if (!isUnlocked) return;
 
     await fetch('/api/progress', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        taskId,
-        userId,
-        completed: checked,
-      }),
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ taskId, userId, completed: checked }),
     });
 
     setTaskStates((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, completed: checked } : task
-      )
+      prev.map((t) => (t.id === taskId ? { ...t, completed: checked } : t)),
     );
 
-    if (onTaskToggle) onTaskToggle();
+    onTaskToggle?.();
   };
 
-  const handleVideoStart = (taskId) => {
+  const openVideo = (taskId) => {
+    setActiveTaskId(taskId);
     setTaskStates((prev) =>
-      prev.map((task) =>
-        task.id === taskId ? { ...task, unlocked: true } : task
-      )
+      prev.map((t) => (t.id === taskId ? { ...t, unlocked: true } : t)),
     );
+    setShowVideoModal(true);
   };
 
   return (
@@ -68,11 +58,9 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
       <VideoModal
         isOpen={showVideoModal}
         onClose={() => setShowVideoModal(false)}
-        onVideoPlay={() => handleVideoStart(activeTaskId)}
-        youtubeUrl={
-          tasks.find((task) => task.id === activeTaskId)?.youtubeUrl || ''
-        }
+        youtubeUrl={tasks.find((t) => t.id === activeTaskId)?.youtubeUrl || ''}
       />
+
       <div className="overflow-x-auto mt-2">
         <table className="min-w-full table-auto border border-zinc-200 dark:border-zinc-800 text-sm rounded-xl overflow-hidden">
           <thead className="bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-white">
@@ -111,14 +99,8 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                         toggleCheckbox(task.id, !localState?.completed)
                       }
                       title={isDisabled ? 'Watch video to unlock' : ''}
-                      className={`mx-auto w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors duration-200 cursor-${
-                        isDisabled ? 'not-allowed' : 'pointer'
-                      }
-                        ${
-                          localState?.completed
-                            ? 'bg-emerald-600 border-emerald-500'
-                            : 'bg-gray-100 border-zinc-400 dark:bg-zinc-800 dark:border-zinc-600'
-                        }`}
+                      className={`mx-auto w-5 h-5 rounded-md border-2 flex items-center justify-center transition-colors duration-200 cursor-${isDisabled ? 'not-allowed' : 'pointer'}
+                        ${localState?.completed ? 'bg-emerald-600 border-emerald-500' : 'bg-gray-100 border-zinc-400 dark:bg-zinc-800 dark:border-zinc-600'}`}
                     >
                       {localState?.completed && (
                         <svg
@@ -137,9 +119,11 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                       )}
                     </div>
                   </td>
+
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800 text-left whitespace-nowrap">
                     {task.title}
                   </td>
+
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800">
                     {task.articleUrl && (
                       <div className="flex justify-center items-center">
@@ -154,21 +138,20 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                       </div>
                     )}
                   </td>
+
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800">
                     {task.youtubeUrl && (
                       <div className="flex justify-center items-center">
                         <button
                           className="text-red-500 text-xl"
-                          onClick={() => {
-                            setActiveTaskId(task.id);
-                            setShowVideoModal(true);
-                          }}
+                          onClick={() => openVideo(task.id)}
                         >
                           <FaYoutube />
                         </button>
                       </div>
                     )}
                   </td>
+
                   <td className="p-3 border-r border-zinc-200 dark:border-zinc-800">
                     {task.practiceUrl && (
                       <div className="flex justify-center items-center">
@@ -183,14 +166,15 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
                       </div>
                     )}
                   </td>
+
                   <td className="p-3">
                     <span
                       className={`px-2 py-1 rounded-full text-xs font-semibold ${
                         task.difficulty === 'Easy'
                           ? 'bg-green-100 text-green-800 dark:bg-green-700 dark:text-green-100'
                           : task.difficulty === 'Medium'
-                          ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100'
-                          : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'
+                            ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-100'
+                            : 'bg-red-100 text-red-800 dark:bg-red-700 dark:text-red-100'
                       }`}
                     >
                       {task.difficulty}
@@ -204,6 +188,4 @@ const ContentTable = ({ tasks, userId, onTaskToggle }) => {
       </div>
     </>
   );
-};
-
-export default ContentTable;
+}
