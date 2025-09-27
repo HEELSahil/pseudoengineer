@@ -27,7 +27,8 @@ export default function PrivacyPolicyPage() {
           to protecting your personal information. This Privacy Policy explains
           how we collect, use, and protect your data when you use our platform.
           This website is operated by pseudoEngineer. Throughout the site, the
-          terms "we", "us" and "our" refer to pseudoEngineer.
+          terms &quot;we&quot;, &quot;us&quot; and &quot;our&quot; refer to
+          pseudoEngineer.
         </p>
       </div>
 

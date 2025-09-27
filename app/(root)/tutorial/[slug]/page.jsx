@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, use } from 'react';
+import { useEffect, useState, use, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import AccordionSection from '@components/AccordionSection';
 import ContentTable from '@components/ContentTable';
@@ -12,17 +12,17 @@ export default function TutorialPage(props) {
   const [tutorialData, setTutorialData] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = async (userId = '') => {
-    const res = await fetch(`/api/tutorials/${params.slug}`, {
-      headers: {
-        'x-user-id': userId,
-      },
-    });
-
-    const data = await res.json();
-    setTutorialData(data);
-    setLoading(false);
-  };
+  const fetchData = useCallback(
+    async (userId = '') => {
+      const res = await fetch(`/api/tutorials/${params.slug}`, {
+        headers: { 'x-user-id': userId },
+      });
+      const data = await res.json();
+      setTutorialData(data);
+      setLoading(false);
+    },
+    [params.slug],
+  );
 
   useEffect(() => {
     if (status === 'authenticated' && session?.user?.id) {
@@ -30,7 +30,7 @@ export default function TutorialPage(props) {
     } else if (status !== 'loading') {
       fetchData();
     }
-  }, [status, session, params.slug]);
+  }, [status, session?.user?.id, fetchData]);
 
   if (loading)
     return (
@@ -74,7 +74,7 @@ export default function TutorialPage(props) {
     : [];
 
   const completedTasks = allTasks.filter(
-    (task) => task.progress?.[0]?.completed
+    (task) => task.progress?.[0]?.completed,
   ).length;
 
   return (
@@ -100,7 +100,7 @@ export default function TutorialPage(props) {
             : section.tasks || [];
 
           const completed = sectionTasks.filter(
-            (t) => t.progress?.[0]?.completed
+            (t) => t.progress?.[0]?.completed,
           ).length;
 
           return (
@@ -113,7 +113,7 @@ export default function TutorialPage(props) {
                 section.lectures.map((lecture) => {
                   const totalTasks = lecture.tasks.length;
                   const completedTasks = lecture.tasks.filter(
-                    (task) => task.progress?.[0]?.completed
+                    (task) => task.progress?.[0]?.completed,
                   ).length;
 
                   return (

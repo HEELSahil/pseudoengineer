@@ -30,8 +30,8 @@ export default function TermsAndConditionsPage() {
           Welcome to pseudoEngineer. These Terms and Conditions govern your use
           of our website and services. By accessing or using our platform, you
           agree to these terms. This website is operated by pseudoEngineer.
-          Throughout the site, the terms "we", "us" and "our" refer to
-          pseudoEngineer.
+          Throughout the site, the terms &quot;we&quot;, &quot;us&quot; and
+          &quot;our&quot; refer to pseudoEngineer.
         </p>
       </div>
 
@@ -44,12 +44,12 @@ export default function TermsAndConditionsPage() {
             </h2>
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-lg pl-10">
-            By accessing or using pseudoEngineer's website, you acknowledge that
-            you have read, understood, and agree to be bound by these Terms. If
-            you do not agree with any part of these Terms, you must not use our
-            website. We reserve the right to modify these Terms at any time
-            without notice. Your continued use of the website following any
-            changes constitutes acceptance of those changes.
+            By accessing or using pseudoEngineer&quot;s website, you acknowledge
+            that you have read, understood, and agree to be bound by these
+            Terms. If you do not agree with any part of these Terms, you must
+            not use our website. We reserve the right to modify these Terms at
+            any time without notice. Your continued use of the website following
+            any changes constitutes acceptance of those changes.
           </p>
         </section>
 
@@ -290,7 +290,7 @@ export default function TermsAndConditionsPage() {
             </h2>
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-lg pl-10">
-            Our content and services are provided "as is" without any
+            Our content and services are provided &quot;as is&quot; without any
             warranties, express or implied. pseudoEngineer does not warrant that
             our website will be uninterrupted or error-free, that defects will
             be corrected, or that our website or the server that makes it

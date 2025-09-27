@@ -80,7 +80,7 @@ export default function VerifyEmailContent() {
     };
 
     verify();
-  }, [token, router]);
+  }, [token, router, tokenValid]);
 
   const handleResend = async () => {
     if (!email) {
