@@ -4,10 +4,10 @@ import Link from 'next/link';
 
 import headerNavLinks from '@data/headerNavLinks';
 
-import AuthButton from './AuthButton';
 import MobileNav from './MobileNav';
 import ThemeSwitch from './ThemeSwitch';
 import Logo from './Logo';
+import UserProfileMenu from './UserProfileMenu';
 
 const Header = () => {
   return (
@@ -30,7 +30,7 @@ const Header = () => {
               ))}
             </div>
             <div className="hidden sm:block">
-              <AuthButton />
+              <UserProfileMenu />
             </div>
             <ThemeSwitch />
             <MobileNav />
