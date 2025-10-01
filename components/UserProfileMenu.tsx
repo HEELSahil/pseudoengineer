@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useSession, signOut } from 'next-auth/react';
 import { ChevronDown, LogOut, Settings, User as UserIcon } from 'lucide-react';
 
@@ -57,9 +58,11 @@ export default function UserProfileMenu() {
         <DropdownMenuSeparator className="my-2 h-px bg-zinc-200 dark:bg-zinc-700" />
 
         <DropdownMenuGroup>
-          <DropdownMenuItem className="py-2">
-            <UserIcon className="mr-2 h-4 w-4" />
-            Profile
+          <DropdownMenuItem asChild className="py-2 cursor-pointer">
+            <Link href="/profile" className="flex items-center">
+              <UserIcon className="mr-2 h-4 w-4" />
+              Profile
+            </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem className="py-2">
