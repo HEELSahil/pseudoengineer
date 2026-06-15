@@ -2,7 +2,6 @@
 
 import { signIn } from 'next-auth/react';
 import { registerUser } from '@/lib/actions/register';
-import { checkEmailVerification, checkUserExists } from '@/lib/auth-helpers';
 import { passwordSchema, emailSchema } from '@/lib/validators';
 
 import { z } from 'zod';
@@ -58,25 +57,12 @@ const AuthForm = ({ type }: { type: FormType }) => {
           toast.error(response.message);
           return;
         }
-        toast.success(response.message, {
-          duration: Infinity,
-          dismissible: true,
-        });
+        toast.success(response.message, { duration: 6000 });
         router.push('/sign-in');
       } else {
-        const userExists = await checkUserExists(data.email);
-
-        if (!userExists) {
-          toast.error('Account not found. Please create a new account.');
-          return;
-        }
-
-        const isVerified = await checkEmailVerification(data.email);
-        if (!isVerified) {
-          toast.error('Please verify your email before signing in.');
-          return;
-        }
-
+        // Let signIn() be the single source of truth: authorize() already
+        // rejects nonexistent/wrong-password (-> 'CredentialsSignin') and
+        // unverified (-> 'EmailNotVerified') users server-side.
         const res = await signIn('credentials', {
           redirect: false,
           email: data.email,
@@ -84,18 +70,22 @@ const AuthForm = ({ type }: { type: FormType }) => {
         });
 
         if (res?.error) {
-          console.log('Sign-in error:', res.error);
-          toast.error('Invalid credentials. Please check your password.');
-        } else {
-          toast.success('Signed in successfully.');
-          router.push('/');
+          toast.error(
+            res.error === 'EmailNotVerified'
+              ? 'Please verify your email before signing in.'
+              : 'Invalid email or password.',
+          );
+          return;
         }
+
+        toast.success('Signed in successfully.');
+        router.push('/');
       }
     } catch (error) {
-      toast.error(`There was an error: ${error}`);
       console.error(error);
+      toast.error('Something went wrong. Please try again.');
     } finally {
-      setIsLoading(false); // Reset loading state regardless of outcome
+      setIsLoading(false);
     }
   };
 

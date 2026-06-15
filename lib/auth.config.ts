@@ -58,7 +58,9 @@ export const authOptions: AuthOptions = {
         if (!user || !user.password) return null;
 
         if (!user.emailVerified) {
-          return null;
+          // Surfaced to the client as res.error === 'EmailNotVerified'
+          // (next-auth maps a thrown error's message to the error code).
+          throw new Error('EmailNotVerified');
         }
 
         const isValid = await bcrypt.compare(
@@ -82,26 +84,10 @@ export const authOptions: AuthOptions = {
     maxAge: 259200,
   },
   callbacks: {
-    async signIn({ user, account }) {
-      if (!user.email) return true;
-
-      const dbUser = await prisma.user.findUnique({
-        where: { email: normalizeEmail(user.email) },
-      });
-
-      if (
-        dbUser &&
-        !dbUser.emailVerified &&
-        account?.provider === 'credentials'
-      ) {
-        // 👇 Redirect to sign-in page with a custom error
-        const url = new URL('/sign-in', process.env.NEXTAUTH_URL);
-        url.searchParams.set('error', 'EmailNotVerified');
-        throw new Error(`NEXT_REDIRECT:${url.toString()}`);
-      }
-
-      return true;
-    },
+    // No signIn callback by design: credentials email-verification is enforced
+    // in authorize() (throws 'EmailNotVerified'), and OAuth email verification
+    // is handled in events.signIn. Re-adding one here would just re-introduce a
+    // redundant per-login DB query.
     async session({ session, token }) {
       const t = token as ExtendedJWT;
 
