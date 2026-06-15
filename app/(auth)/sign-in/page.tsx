@@ -1,8 +1,12 @@
 import AuthForm from '@/components/AuthForm';
-import React from 'react';
 
-const page = () => {
-  return <AuthForm type="sign-in" />;
+const SignInPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) => {
+  const { error } = await searchParams;
+  return <AuthForm type="sign-in" authError={error} />;
 };
 
-export default page;
+export default SignInPage;

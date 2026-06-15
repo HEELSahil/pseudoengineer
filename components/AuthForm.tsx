@@ -11,7 +11,7 @@ import { toast } from 'sonner';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Form } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
@@ -29,11 +29,32 @@ const authFormSchema = (type: FormType) => {
   });
 };
 
-const AuthForm = ({ type }: { type: FormType }) => {
+// Maps next-auth error codes (delivered via ?error= on redirect) to messages.
+const AUTH_ERROR_MESSAGES: Record<string, string> = {
+  OAuthAccountNotLinked:
+    'This email is already registered with a password. Please sign in with your email and password below.',
+  EmailNotVerified: 'Please verify your email before signing in.',
+};
+
+const AuthForm = ({
+  type,
+  authError,
+}: {
+  type: FormType;
+  authError?: string;
+}) => {
   const router = useRouter();
   const isSignIn = type === 'sign-in';
   const formSchema = authFormSchema(type);
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (authError) {
+      toast.error(
+        AUTH_ERROR_MESSAGES[authError] ?? 'Could not sign in. Please try again.',
+      );
+    }
+  }, [authError]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),

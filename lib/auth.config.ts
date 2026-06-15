@@ -105,17 +105,39 @@ export const authOptions: AuthOptions = {
     },
   },
   events: {
+    // Mark an OAuth user's email as verified ONLY when the provider actually
+    // asserts it. Google (OIDC) carries `email_verified` in the id_token.
+    // GitHub is intentionally NOT auto-verified: its default flow selects the
+    // primary email without surfacing the verified flag, so we don't trust it
+    // blindly. This runs post-creation (next-auth forces emailVerified=null on
+    // the new OAuth row), and never blocks sign-in if it fails.
     async signIn({ user, account }) {
       const typedUser = user as PrismaUser;
+
       if (
-        account?.provider !== 'credentials' &&
+        account?.provider === 'google' &&
+        account.id_token &&
         typedUser.email &&
         !typedUser.emailVerified
       ) {
-        await prisma.user.update({
-          where: { email: normalizeEmail(typedUser.email) },
-          data: { emailVerified: new Date() },
-        });
+        try {
+          const claims = JSON.parse(
+            Buffer.from(
+              account.id_token.split('.')[1],
+              'base64url',
+            ).toString(),
+          );
+          if (claims.email_verified === true) {
+            await prisma.user.update({
+              where: { email: normalizeEmail(typedUser.email) },
+              data: { emailVerified: new Date() },
+            });
+          }
+        } catch (err) {
+          if (process.env.NODE_ENV === 'development') {
+            console.error('Failed to apply Google email verification:', err);
+          }
+        }
       }
 
       if (process.env.NODE_ENV === 'development') {
@@ -135,6 +157,9 @@ export const authOptions: AuthOptions = {
   },
   pages: {
     signIn: '/sign-in',
+    // Route auth errors (e.g. OAuthAccountNotLinked) back to the sign-in page,
+    // which reads `?error=` and shows a friendly message.
+    error: '/sign-in',
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === 'development',
