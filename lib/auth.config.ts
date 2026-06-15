@@ -6,15 +6,12 @@ import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
-import { JWT } from 'next-auth/jwt';
 import { prisma } from '@/lib/prisma';
 import { normalizeEmail } from '@/lib/validators';
 
-interface ExtendedJWT extends JWT {
-  exp?: number;
-  id?: string;
-  absoluteExpiry?: number;
-}
+// Session lifetime, shared by the cookie maxAge below. Rolling window: each
+// request within it extends the session (next-auth's default JWT behavior).
+const SESSION_MAX_AGE_SECONDS = 60 * 60 * 24 * 3; // 3 days
 
 /**
  * Wraps PrismaAdapter so the email is normalized (trimmed + lowercased) on the
@@ -67,7 +64,16 @@ export const authOptions: AuthOptions = {
           credentials.password,
           user.password,
         );
-        return isValid ? user : null;
+        // Return only the fields next-auth needs in the token — never the
+        // password hash or other columns from the row.
+        return isValid
+          ? {
+              id: user.id,
+              name: user.name,
+              email: user.email,
+              image: user.image,
+            }
+          : null;
       },
     }),
     GoogleProvider({
@@ -81,46 +87,21 @@ export const authOptions: AuthOptions = {
   ],
   session: {
     strategy: 'jwt',
-    maxAge: 259200,
+    maxAge: SESSION_MAX_AGE_SECONDS,
   },
   callbacks: {
-    // No signIn callback by design: credentials email-verification is enforced
-    // in authorize() (throws 'EmailNotVerified'), and OAuth email verification
-    // is handled in events.signIn. Re-adding one here would just re-introduce a
-    // redundant per-login DB query.
+    // No signIn or jwt callback by design:
+    // - credentials email-verification is enforced in authorize() (throws
+    //   'EmailNotVerified'); OAuth verification is handled in events.signIn.
+    // - the user id rides on the standard `token.sub` (next-auth sets it to
+    //   user.id), so no custom jwt callback is needed to thread it through.
+    // Session expiry is the rolling `maxAge` window above; next-auth owns
+    // `session.expires`, so we intentionally don't override it.
     async session({ session, token }) {
-      const t = token as ExtendedJWT;
-
-      if (t && session.user) {
-        session.user.id = t.sub as string;
-
-        session.expires = new Date(
-          (t.absoluteExpiry ?? t.exp ?? Date.now() / 1000) * 1000,
-        ).toISOString();
+      if (session.user && token.sub) {
+        session.user.id = token.sub;
       }
-
       return session;
-    },
-    async jwt({ token, user }) {
-      if (user) {
-        token.id = user.id;
-        const now = Math.floor(Date.now() / 1000);
-        token.absoluteExpiry = now + 259200;
-        if (process.env.NODE_ENV === 'development') {
-          if (typeof token.absoluteExpiry === 'number') {
-            console.log(
-              'Token absolute expiry set to:',
-              new Date(token.absoluteExpiry * 1000),
-            );
-          } else {
-            console.log(
-              'absoluteExpiry is not set or not a number:',
-              token.absoluteExpiry,
-            );
-          }
-        }
-      }
-      return token;
     },
   },
   events: {
