@@ -3,7 +3,7 @@
 import { signIn } from 'next-auth/react';
 import { registerUser } from '@/lib/actions/register';
 import { checkEmailVerification, checkUserExists } from '@/lib/auth-helpers';
-import { passwordSchema } from '@/lib/validators';
+import { passwordSchema, emailSchema } from '@/lib/validators';
 
 import { z } from 'zod';
 import Link from 'next/link';
@@ -22,7 +22,7 @@ import { FormType } from '@/types';
 const authFormSchema = (type: FormType) => {
   return z.object({
     name: type === 'sign-up' ? z.string().min(2) : z.string().optional(),
-    email: z.string().email(),
+    email: emailSchema,
     password:
       type === 'sign-up'
         ? passwordSchema

@@ -2,15 +2,20 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { createVerificationToken } from '@/lib/emailVerificationToken';
 import { sendVerificationEmail } from '@/lib/email';
+import { normalizeEmail } from '@/lib/validators';
 
 export async function POST(req: Request) {
   const { email } = await req.json();
 
-  if (!email) {
+  if (!email || typeof email !== 'string') {
     return NextResponse.json({ success: false, message: 'Email is required.' });
   }
 
-  const user = await prisma.user.findUnique({ where: { email } });
+  const normalizedEmail = normalizeEmail(email);
+
+  const user = await prisma.user.findUnique({
+    where: { email: normalizedEmail },
+  });
 
   if (!user) {
     return NextResponse.json({ success: false, message: 'User not found.' });

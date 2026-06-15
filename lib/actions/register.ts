@@ -4,15 +4,19 @@ import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
 import { sendVerificationEmail } from '@/lib/email';
 import { createVerificationToken } from '@/lib/emailVerificationToken';
+import { normalizeEmail } from '@/lib/validators';
 
 export async function registerUser(
   name: string,
   email: string,
   password: string,
 ) {
+  const normalizedEmail = normalizeEmail(email);
   const hashedPassword = await bcrypt.hash(password, 10);
 
-  const existingUser = await prisma.user.findUnique({ where: { email } });
+  const existingUser = await prisma.user.findUnique({
+    where: { email: normalizedEmail },
+  });
   if (existingUser) {
     return { success: false, message: 'User already exists. Please sign in.' };
   }
@@ -20,7 +24,7 @@ export async function registerUser(
   const user = await prisma.user.create({
     data: {
       name,
-      email,
+      email: normalizedEmail,
       password: hashedPassword,
     },
   });

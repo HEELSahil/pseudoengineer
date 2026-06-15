@@ -1,12 +1,14 @@
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import type { User as PrismaUser } from '@prisma/client';
 import { AuthOptions } from 'next-auth';
+import { Adapter } from 'next-auth/adapters';
 import GoogleProvider from 'next-auth/providers/google';
 import GitHubProvider from 'next-auth/providers/github';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import bcrypt from 'bcryptjs';
 import { JWT } from 'next-auth/jwt';
 import { prisma } from '@/lib/prisma';
+import { normalizeEmail } from '@/lib/validators';
 
 interface ExtendedJWT extends JWT {
   exp?: number;
@@ -14,8 +16,31 @@ interface ExtendedJWT extends JWT {
   absoluteExpiry?: number;
 }
 
+/**
+ * Wraps PrismaAdapter so the email is normalized (trimmed + lowercased) on the
+ * adapter's own write/read paths too — i.e. the user row that OAuth sign-in
+ * creates on first login, and the email-based account lookup. This is the one
+ * email path that lives in next-auth's code rather than ours, so without this
+ * an OAuth provider returning mixed-case email (e.g. GitHub) would still store
+ * an un-normalized row.
+ */
+function normalizedPrismaAdapter(): Adapter {
+  const adapter = PrismaAdapter(prisma);
+  return {
+    ...adapter,
+    createUser: (data) =>
+      adapter.createUser!({ ...data, email: normalizeEmail(data.email) }),
+    updateUser: (data) =>
+      adapter.updateUser!({
+        ...data,
+        email: data.email ? normalizeEmail(data.email) : data.email,
+      }),
+    getUserByEmail: (email) => adapter.getUserByEmail!(normalizeEmail(email)),
+  };
+}
+
 export const authOptions: AuthOptions = {
-  adapter: PrismaAdapter(prisma),
+  adapter: normalizedPrismaAdapter(),
   providers: [
     CredentialsProvider({
       name: 'Credentials',
@@ -27,7 +52,7 @@ export const authOptions: AuthOptions = {
         if (!credentials?.email || !credentials?.password) return null;
 
         const user = await prisma.user.findUnique({
-          where: { email: credentials.email },
+          where: { email: normalizeEmail(credentials.email) },
         });
 
         if (!user || !user.password) return null;
@@ -58,8 +83,10 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async signIn({ user, account }) {
+      if (!user.email) return true;
+
       const dbUser = await prisma.user.findUnique({
-        where: { email: user.email! },
+        where: { email: normalizeEmail(user.email) },
       });
 
       if (
@@ -119,7 +146,7 @@ export const authOptions: AuthOptions = {
         !typedUser.emailVerified
       ) {
         await prisma.user.update({
-          where: { email: typedUser.email },
+          where: { email: normalizeEmail(typedUser.email) },
           data: { emailVerified: new Date() },
         });
       }
