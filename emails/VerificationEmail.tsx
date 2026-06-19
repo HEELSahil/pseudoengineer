@@ -57,7 +57,7 @@ export const VerificationEmail: React.FC<VerificationEmailProps> = ({
         </h2>
 
         <p style={{ marginBottom: '25px' }}>
-          Thanks for starting the account creation process. To ensure it's
+          Thanks for starting the account creation process. To ensure it&apos;s
           really you, we need to verify your email address.
         </p>
 
@@ -81,7 +81,7 @@ export const VerificationEmail: React.FC<VerificationEmailProps> = ({
         </div>
 
         <p style={{ fontSize: '14px', color: '#6b7280' }}>
-          If the button doesn't work, you can copy and paste this link into your
+          If the button doesn&apos;t work, you can copy and paste this link into your
           browser:
         </p>
         <p
