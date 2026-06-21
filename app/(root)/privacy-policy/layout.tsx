@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import SectionContainer from '@components/SectionContainer';
 
 export const metadata: Metadata = {
   metadataBase:
@@ -42,5 +43,5 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+  return <SectionContainer>{children}</SectionContainer>;
 }

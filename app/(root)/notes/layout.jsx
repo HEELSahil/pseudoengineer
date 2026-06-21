@@ -1,3 +1,5 @@
+import SectionContainer from '@components/SectionContainer';
+
 export const metadata = {
   metadataBase:
     process.env.NODE_ENV === 'production'
@@ -44,8 +46,10 @@ export const metadata = {
 
 export default function Layout({ children }) {
   return (
-    <section className="divide-y divide-gray-200 dark:divide-gray-700">
-      {children}
-    </section>
+    <SectionContainer>
+      <section className="divide-y divide-gray-200 dark:divide-gray-700">
+        {children}
+      </section>
+    </SectionContainer>
   );
 }

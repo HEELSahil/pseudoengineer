@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useState, useRef } from 'react';
 import { seriesList } from '@data/seriesList';
 import SeriesCard from '@components/SeriesCard';
+import SectionContainer from '@components/SectionContainer';
 import usePageViewLogger from '@components/usePageViewLogger';
 
 export default function HomePage() {
@@ -74,7 +75,7 @@ export default function HomePage() {
   };
 
   return (
-    <>
+    <SectionContainer>
       <section>
         <div className="flex justify-center md:pr-20 lg:pr-0 xl:pr-60 lg:pt-10 text-4xl md:text-6xl lg:text-7xl font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-indigo-500 via-purple-500 to-indigo-500 animate-text">
           From Pretend to Pro, Your Journey to Genuine Tech Mastery Starts Here
@@ -289,6 +290,6 @@ export default function HomePage() {
           </nav>
         </div>
       </section>
-    </>
+    </SectionContainer>
   );
 }

@@ -6,12 +6,12 @@ const LayoutWrapper = ({ children }) => {
   return (
     <>
       <Header />
-      <SectionContainer>
-        <div className="flex h-screen flex-col justify-between pt-24 md:pt-32">
-          <main className="mb-auto">{children}</main>
+      <div className="flex h-screen flex-col justify-between pt-24 md:pt-32">
+        <main className="mb-auto">{children}</main>
+        <SectionContainer>
           <Footer />
-        </div>
-      </SectionContainer>
+        </SectionContainer>
+      </div>
     </>
   );
 };
