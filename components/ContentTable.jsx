@@ -64,7 +64,7 @@ export default function ContentTable({ tasks, userId, onTaskToggle }) {
       <div className="overflow-x-auto mt-2">
         <table className="min-w-full table-auto border border-zinc-200 dark:border-zinc-800 text-sm rounded-xl overflow-hidden">
           <thead className="bg-gray-100 dark:bg-zinc-800 text-gray-700 dark:text-white">
-            <tr className="text-center">
+            <tr className="text-center tracking-wide">
               <th className="p-3 border-r border-zinc-200 dark:border-zinc-700">
                 Status
               </th>

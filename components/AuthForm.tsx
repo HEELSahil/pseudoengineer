@@ -121,7 +121,7 @@ const AuthForm = ({
         </div>
       </Link>
 
-      <h2 className="pb-4 text-3xl font-extrabold text-center text-white">
+      <h2 className="pb-4 text-3xl font-semibold text-center text-white">
         {isSignIn ? 'Log in to your account' : 'Create a new account'}
       </h2>
 

@@ -39,7 +39,7 @@ const SimilarCourses = ({ currentCourseSlug, currentProblemTags }) => {
         <>
             <div className="flex flex-row justify-between">
                 <div>
-                    <h3 className="font-bold md:font-extrabold text-[21px] md:text-2xl tracking-wide">
+                    <h3 className="font-semibold text-[21px] md:text-2xl tracking-wide">
                         Similar courses like this one
                     </h3>
                 </div>
@@ -84,7 +84,7 @@ const SimilarCourses = ({ currentCourseSlug, currentProblemTags }) => {
                                             height={306}
                                         />
                                         <div className="px-1 pt-4 pb-3">
-                                            <h2 className="mb-3 text-[18px] font-bold">{s.courseHeading}</h2>
+                                            <h2 className="mb-3 text-[18px] font-semibold">{s.courseHeading}</h2>
                                         </div>
                                     </div>
                                 </Link>

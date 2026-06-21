@@ -10,7 +10,7 @@ export default function ContactPage() {
     return (
         <section className="divide-y divide-gray-200 dark:divide-gray-700">
             <div className="space-y-2 pt-6 pb-8 md:space-y-5">
-                <h1 className="pb-2 text-4xl md:text-6xl sm:leading-10 md:leading-14 leading-9 tracking-tight font-extrabold md:font-bold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-fuchsia-500 via-rose-500 to-fuchsia-500 animate-text">
+                <h1 className="pb-2 text-4xl md:text-6xl sm:leading-10 md:leading-14 leading-9 tracking-tight font-semibold bg-gradient-to-r bg-clip-text text-transparent from-fuchsia-500 via-rose-500 to-fuchsia-500 animate-text">
                     Get In Touch
                 </h1>
                 <p className="text-gray-500 dark:text-gray-400 text-lg">

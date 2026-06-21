@@ -32,7 +32,7 @@ const SeriesCompletionTracker = ({ total, completed }) => {
           </span>
           <span className="text-gray-500 dark:text-gray-400"> / {total}</span>
         </span>
-        <span className="text-emerald-600 dark:text-emerald-400 font-bold">
+        <span className="text-emerald-600 dark:text-emerald-400 font-bold tracking-wide">
           {percent}% complete
         </span>
       </p>

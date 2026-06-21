@@ -36,7 +36,7 @@ const RulesModal = ({ isOpen, onClose }) => {
         </button>
 
         <div className="mb-6">
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+          <h2 className="text-2xl font-semibold text-gray-900 dark:text-white flex items-center">
             <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 p-2 rounded-lg mr-3">
               📋
             </span>

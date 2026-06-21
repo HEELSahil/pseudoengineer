@@ -24,10 +24,10 @@ export default function Problem(props) {
 
     return (
         <section>
-            <h1 className='flex justify-center pt-6 pb-5 text-lg tracking-widest font-bold bg-gradient-to-r bg-clip-text text-transparent from-orange-500 via-yellow-500 to-orange-500 animate-text'>
+            <h1 className='flex justify-center pt-6 pb-5 text-lg tracking-widest font-semibold bg-gradient-to-r bg-clip-text text-transparent from-orange-500 via-yellow-500 to-orange-500 animate-text'>
                 &lt; {problem.ctitle.toUpperCase()} /&gt;
             </h1>
-            <h2 className='text-center pb-5 text-4xl md:text-5xl xl:text-6xl tracking-wide leading-11 font-extrabold'>
+            <h2 className='text-center pb-5 text-4xl md:text-5xl xl:text-6xl tracking-wide leading-11 font-semibold'>
                 {problem.courseHeading}
             </h2>
             <p className='text-center pb-9 font-medium text-gray-500 dark:text-gray-400'>

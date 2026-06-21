@@ -14,7 +14,7 @@ const NotesCard = ({ title, imgSrc, href }) => (
                         height={306}
                     />
                     <div className="p-6">
-                        <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">{title}</h2>
+                        <h2 className="mb-3 text-2xl font-semibold leading-8 tracking-wide">{title}</h2>
                         <p className="mb-3 max-w-none text-gray-500 dark:text-gray-400">Download Course Notes Here</p>
                         <Link href={href} className="text-base font-medium leading-6 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
                             Download &rarr;

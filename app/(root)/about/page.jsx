@@ -9,7 +9,7 @@ export default function Page() {
     <>
       <div className="space-y-2 py-8 md:space-y-5">
         <div className="w-5/6 p-6 border-2 border-gray-300 rounded-3xl">
-          <div className="pb-2 text-3xl md:text-5xl font-extrabold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
+          <div className="pb-2 text-3xl md:text-5xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
             Who is a pseudoEngineer?
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-lg pt-3 md:pb-3">
@@ -28,7 +28,7 @@ export default function Page() {
       </div>
       <div className="flex space-y-2 py-2 md:space-y-5 justify-end">
         <div className="w-5/6 md:w-3/4 p-6 border-2 border-gray-300 rounded-3xl">
-          <div className="pb-2 text-3xl md:text-5xl font-extrabold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
+          <div className="pb-2 text-3xl md:text-5xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
             Why do we do this?
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-lg pt-3 md:pb-4">
@@ -42,7 +42,7 @@ export default function Page() {
       </div>
       <div className="space-y-2 py-8 md:space-y-5">
         <div className="w-5/6 md:w-3/4 p-6 border-2 border-gray-300 rounded-3xl">
-          <div className="pb-2 text-3xl md:text-5xl font-extrabold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
+          <div className="pb-2 text-3xl md:text-5xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-indigo-500 to-sky-500 animate-text">
             How will pseudoEngineer help?
           </div>
           <p className="text-gray-500 dark:text-gray-400 text-lg pt-3 md:pb-3">

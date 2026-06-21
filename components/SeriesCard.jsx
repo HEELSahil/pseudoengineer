@@ -15,7 +15,7 @@ const SeriesCard = ({ id, title, slug, description, imgSrc }) => (
               height={306}
             />
             <div className="px-6 pt-6 pb-6">
-              <h2 className="mb-3 text-2xl font-bold leading-8 tracking-tight">
+              <h2 className="mb-3 text-2xl font-semibold leading-8 tracking-wide">
                 {title}
               </h2>
               <p className="max-w-none text-gray-500 dark:text-gray-400 font-medium">

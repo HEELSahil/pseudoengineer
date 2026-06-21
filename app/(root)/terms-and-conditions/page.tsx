@@ -23,7 +23,7 @@ export default function TermsAndConditionsPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 pb-12">
       <div className="space-y-2 py-8 md:space-y-5">
-        <h1 className="pb-2 text-3xl md:text-5xl font-extrabold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-blue-500 to-sky-500 animate-text">
+        <h1 className="pb-2 text-3xl md:text-5xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-blue-500 to-sky-500 animate-text">
           Terms and Conditions
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg pt-3">
@@ -39,7 +39,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <FileText size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               1. Acceptance of Terms
             </h2>
           </div>
@@ -56,7 +56,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <BookOpen size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               2. Content and Services
             </h2>
           </div>
@@ -74,7 +74,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Download size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               3. Downloadable Resources
             </h2>
           </div>
@@ -137,7 +137,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Copyright size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               4. Intellectual Property Rights
             </h2>
           </div>
@@ -160,7 +160,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Edit3 size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               5. Prohibited Activities
             </h2>
           </div>
@@ -225,7 +225,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Scale size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               6. Enforcement and Legal Action
             </h2>
           </div>
@@ -270,7 +270,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Link size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               7. Third-Party Links
             </h2>
           </div>
@@ -285,7 +285,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Shield size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               8. Disclaimer of Warranties
             </h2>
           </div>
@@ -301,7 +301,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Globe size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               9. Governing Law
             </h2>
           </div>
@@ -317,7 +317,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <RefreshCw size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               10. Changes to Terms
             </h2>
           </div>
@@ -332,7 +332,7 @@ export default function TermsAndConditionsPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Mail size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               11. Contact Us
             </h2>
           </div>

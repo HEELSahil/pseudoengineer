@@ -19,7 +19,7 @@ export default function PrivacyPolicyPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 pb-12">
       <div className="space-y-2 py-8 md:space-y-5">
-        <h1 className="pb-2 text-3xl md:text-5xl font-extrabold lg:font-extrabold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-blue-500 to-sky-500 animate-text">
+        <h1 className="pb-2 text-3xl md:text-5xl font-semibold bg-gradient-to-r bg-clip-text text-transparent from-sky-500 via-blue-500 to-sky-500 animate-text">
           Privacy Policy
         </h1>
         <p className="text-gray-500 dark:text-gray-400 text-lg pt-3">
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Settings size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               1. Information We Collect
             </h2>
           </div>
@@ -80,7 +80,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Database size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               2. How We Use Your Information
             </h2>
           </div>
@@ -128,7 +128,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Share2 size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               3. Third-Party Sharing
             </h2>
           </div>
@@ -142,7 +142,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Shield size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               4. Data Retention & Security
             </h2>
           </div>
@@ -156,7 +156,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Users size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               5. Your Rights
             </h2>
           </div>
@@ -214,7 +214,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Shield size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               6. Children&apos;s Privacy
             </h2>
           </div>
@@ -228,7 +228,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <RefreshCw size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               7. Changes to This Privacy Policy
             </h2>
           </div>
@@ -242,7 +242,7 @@ export default function PrivacyPolicyPage() {
         <section className="space-y-4">
           <div className="flex items-center gap-3">
             <Mail size={24} className="text-sky-500 flex-shrink-0" />
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 dark:text-gray-200">
+            <h2 className="text-2xl md:text-3xl font-semibold text-gray-800 dark:text-gray-200">
               8. Contact Us
             </h2>
           </div>
